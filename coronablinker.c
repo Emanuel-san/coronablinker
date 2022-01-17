@@ -7,13 +7,6 @@ struct date
     int month;
     int year;
 };
-int getCurrentDays(int currentMonth)
-{
-    int daysInEachMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    int currentDays = daysInEachMonth[currentMonth - 1];
-
-    return currentDays;
-}
 
 // Checks for leap year
 bool isLeapYear(int currentYear)
@@ -22,24 +15,20 @@ bool isLeapYear(int currentYear)
     return currentYear % 4 == 0 && (currentYear % 100 != 0 || currentYear % 400 == 0);
 }
 
-bool checkDate(struct date *checkDate)
+// checks id date is valid
+bool checkDate(struct date *date)
 {
 
-    int daysInEachMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    if (checkDate->month == 2 && isLeapYear(checkDate->year))
+    int daysInMonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (date->month == 2 && isLeapYear(date->year))
     {
-        daysInEachMonth[1] = 29;
+        daysInMonth[2] += 1;
     }
-
-    if (checkDate->day < 1 || checkDate->day > daysInEachMonth[checkDate->month - 1])
-    {
-    }
-    // bool leapYear = false;
-    // printf("%d.%d.%d\n", checkDate->day, checkDate->month, checkDate->year);
-    // leapYear = isLeapYear(checkDate->year);
-    // int daysInMonth = getCurrentDays(checkDate->month);
+    // true if day, month and year is correct, else false
+    return (date->day > 0 && date->day <= daysInMonth[date->month]) && (date->month > 0 && date->month <= 12) && date->year >= 2019;
 }
 
+// Enter date
 struct date enterDate(void)
 {
     struct date newDate;
@@ -47,10 +36,15 @@ struct date enterDate(void)
     {
         printf("Enter date (DD.MM.YYYY): ");
         scanf("%d.%d.%d", &newDate.day, &newDate.month, &newDate.year);
+        if (!checkDate(&newDate))
+        {
+            printf("Invalid date, try again!\n");
+        }
     } while (!checkDate(&newDate));
 
     return newDate;
 }
+
 // Enter start code
 // TODO change return type if necessary
 int enterStartCode(void)
@@ -97,9 +91,10 @@ void handleChoice(void)
             idCode = enterIdCode();
             printf("%d\n", idCode);
             newDate = enterDate();
-            // printf("%d.%d.%d\n", newDate.day, newDate.month, newDate.year);
+            printf("%d.%d.%d\n", newDate.day, newDate.month, newDate.year);
             break;
         case 3:
+            // TODO make function later if needed
             printf("You've been exposed to corona!\n");
             break;
         case 0:
