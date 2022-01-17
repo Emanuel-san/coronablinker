@@ -2,10 +2,21 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+// Enter start code
+// TODO change return type if necessary
+int enterStartCode(void)
+{
+    int startCode;
+    printf("Please enter your start code: ");
+    scanf("%d", &startCode);
+    printf("Start code accepted! %d\n", startCode);
+    return startCode;
+}
+
 void handleChoice(void)
 {
     int choice = 0;
-
+    int startCode;
     {
         printf("1. Enter Startcode\n");
         printf("2. Enter ID code and date\n");
@@ -18,7 +29,8 @@ void handleChoice(void)
         switch (choice)
         {
         case 1:
-            // call startcode function
+            startCode = enterStartCode();
+            printf("%d\n", startCode);
             break;
         case 2:
             // call another input func
@@ -41,6 +53,5 @@ int main(void)
     {
         handleChoice();
     }
-    printf("testtest\n")
     return 0;
 }
