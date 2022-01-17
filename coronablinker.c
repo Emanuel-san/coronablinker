@@ -41,6 +41,5 @@ int main(void)
     {
         handleChoice();
     }
-    printf("testtest\n")
     return 0;
 }
