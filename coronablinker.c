@@ -2,10 +2,32 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+// Enter start code
+// TODO change return type if necessary
+int enterStartCode(void)
+{
+    int startCode;
+    printf("Please enter your start code: ");
+    scanf("%d", &startCode);
+    printf("Start code accepted! \n");
+    return startCode;
+}
+
+// Enter ID code
+//  TODO change return type if necessary
+int enterIdCode(void)
+{
+    int idCode;
+    printf("Please enter your ID code: ");
+    scanf("%d", &idCode);
+    printf("ID code accepted! \n");
+    return idCode;
+}
+
 void handleChoice(void)
 {
     int choice = 0;
-
+    int startCode, idCode;
     {
         printf("1. Enter Startcode\n");
         printf("2. Enter ID code and date\n");
@@ -18,10 +40,13 @@ void handleChoice(void)
         switch (choice)
         {
         case 1:
-            // call startcode function
+            startCode = enterStartCode();
+            printf("%d\n", startCode);
             break;
         case 2:
-            // call another input func
+            idCode = enterIdCode();
+            printf("%d\n", idCode);
+            // call date func
             break;
         case 3:
             printf("You've been exposed to corona!\n");
