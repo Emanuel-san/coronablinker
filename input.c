@@ -3,6 +3,12 @@
 #include <ctype.h>
 #include "input.h"
 
+#ifdef DEBUGON
+#define DEBUG(msg) printf("DEBUG %s\n", msg)
+#else
+#define DEBUG(msg)
+#endif
+
 // TODO change return type if necessary
 int enterStartCode(void)
 {
@@ -42,6 +48,7 @@ int enterIdCode(void)
         if (scanf("%d%c", &idCode, &term) != 2 || term != '\n')
         {
             {
+
                 printf("Invalid input.\n");
                 fflush(stdin);
                 idCode = 0;
@@ -58,24 +65,11 @@ int enterIdCode(void)
 
 bool validStartcode(int code)
 {
-    if (code >= 100000 && code <= 999999)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    DEBUG("Checking startcode");
+    return (code >= 100000 && code <= 999999);
 }
 
 bool validIdcode(int code)
 {
-    if (code >= 1000000 && code <= 9999999)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return (code >= 1000000 && code <= 9999999);
 }

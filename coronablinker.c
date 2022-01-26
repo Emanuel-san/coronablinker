@@ -12,7 +12,7 @@ void handleChoice(void)
 {
     int choice = 0;
     int startCode, idCode;
-    struct date newDate;
+    date newDate;
     {
         printf("1. Enter Startcode\n");
         printf("2. Enter ID code and date\n");

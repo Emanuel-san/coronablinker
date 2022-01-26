@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-typedef struct date
+typedef struct date_struct
 {
     int day;
     int month;
