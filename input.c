@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 #include "input.h"
 
 // TODO change return type if necessary
@@ -19,4 +21,16 @@ int enterIdCode(void)
     scanf("%d", &idCode);
     printf("ID code accepted! \n");
     return idCode;
+}
+
+bool isValidInput(int input)
+{
+    if (isdigit(input))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

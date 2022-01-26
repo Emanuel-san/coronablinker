@@ -1,6 +1,4 @@
 /* ToDo:
-- Dela upp i olika filer, typ datum i en
-- Kolla att datum inte är i framtiden
 - Kolla att man inte matar in bokstäver istället för siffror (ctype.h)
 - Hitta på bra begränsningar till startkod och IDkod
 */
