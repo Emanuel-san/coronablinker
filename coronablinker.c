@@ -6,51 +6,8 @@
 */
 
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdlib.h>
-struct date
-{
-    int day;
-    int month;
-    int year;
-};
-
-// Checks for leap year
-bool isLeapYear(int currentYear)
-{
-    // true if the year i divisible by 4 but not by both 4 and 100, except if its also divisible by 400.
-    return currentYear % 4 == 0 && (currentYear % 100 != 0 || currentYear % 400 == 0);
-}
-
-// checks id date is valid
-bool checkDate(struct date *date)
-{
-
-    int daysInMonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    if (date->month == 2 && isLeapYear(date->year))
-    {
-        daysInMonth[2] += 1;
-    }
-    // true if day, month and year is correct, else false
-    return (date->day > 0 && date->day <= daysInMonth[date->month]) && (date->month > 0 && date->month <= 12) && date->year >= 2019;
-}
-
-// Enter date
-struct date enterDate(void)
-{
-    struct date newDate;
-    do
-    {
-        printf("Enter date (DD.MM.YYYY): ");
-        scanf("%d.%d.%d", &newDate.day, &newDate.month, &newDate.year);
-        if (!checkDate(&newDate))
-        {
-            printf("Invalid date, try again!\n");
-        }
-    } while (!checkDate(&newDate));
-
-    return newDate;
-}
+#include "date.h"
 
 // Enter start code
 // TODO change return type if necessary
