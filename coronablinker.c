@@ -20,29 +20,35 @@ void handleChoice(void)
         printf("0. Quit\n");
 
         printf("Menu choice: ");
-        scanf("%d", &choice);
-
-        switch (choice)
+        if (scanf("%d", &choice) != 1)
         {
-        case 1:
-            startCode = enterStartCode();
-            printf("%d\n", startCode);
-            break;
-        case 2:
-            idCode = enterIdCode();
-            printf("%d\n", idCode);
-            newDate = enterDate();
-            printf("%d.%d.%d\n", newDate.day, newDate.month, newDate.year);
-            break;
-        case 3:
-            // TODO make function later if needed
-            printf("You've been exposed to corona!\n");
-            break;
-        case 0:
-            printf("Good bye! Dont get sick, stay home, clean your hands, stay safe!\n");
-            exit(1);
-        default:
             printf("Invalid choice!\n");
+            fflush(stdin);
+        }
+        else
+        {
+            switch (choice)
+            {
+            case 1:
+                startCode = enterStartCode();
+                printf("%d\n", startCode);
+                break;
+            case 2:
+                idCode = enterIdCode();
+                printf("%d\n", idCode);
+                newDate = enterDate();
+                printf("%d.%d.%d\n", newDate.day, newDate.month, newDate.year);
+                break;
+            case 3:
+                // TODO make function later if needed
+                printf("You've been exposed to corona!\n");
+                break;
+            case 0:
+                printf("Good bye! Dont get sick, stay home, clean your hands, stay safe!\n");
+                exit(1);
+            default:
+                printf("Invalid choice!\n");
+            }
         }
     }
 }

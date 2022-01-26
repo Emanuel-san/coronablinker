@@ -31,15 +31,25 @@ bool checkDate(date date)
 date enterDate(void)
 {
     date newDate;
+    bool goOn = true;
     do
     {
         printf("Enter date (DD.MM.YYYY): ");
-        scanf("%d.%d.%d", &newDate.day, &newDate.month, &newDate.year);
-        if (!checkDate(newDate) || isDateInFuture(newDate))
+        char term;
+        if (scanf("%d.%d.%d%c", &newDate.day, &newDate.month, &newDate.year, &term) != 4 || term != '\n')
+        {
+            printf("Invalid!\n");
+            fflush(stdin);
+        }
+        else if (!checkDate(newDate) || isDateInFuture(newDate))
         {
             printf("Invalid or unreasonable date, try again.\n");
         }
-    } while (!checkDate(newDate) || isDateInFuture(newDate));
+        else
+        {
+            goOn = false;
+        }
+    } while (!checkDate(newDate) || isDateInFuture(newDate) || goOn == true);
 
     return newDate;
 }
