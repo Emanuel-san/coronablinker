@@ -31,7 +31,7 @@ bool checkDate(date date)
 date enterDate(void)
 {
     date newDate;
-    bool goOn = true;
+
     do
     {
         printf("Enter date (DD.MM.YYYY): ");
@@ -40,16 +40,15 @@ date enterDate(void)
         {
             printf("Invalid!\n");
             fflush(stdin);
+            // If input was wrong we change day to 0 to invalidate checkDate function in while loop.
+            newDate.day = 0;
         }
         else if (!checkDate(newDate) || isDateInFuture(newDate))
         {
             printf("Invalid or unreasonable date, try again.\n");
         }
-        else
-        {
-            goOn = false;
-        }
-    } while (!checkDate(newDate) || isDateInFuture(newDate) || goOn == true);
+
+    } while (!checkDate(newDate) || isDateInFuture(newDate));
 
     return newDate;
 }
