@@ -8,28 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "date.h"
-
-// Enter start code
-// TODO change return type if necessary
-int enterStartCode(void)
-{
-    int startCode;
-    printf("Please enter your start code: ");
-    scanf("%d", &startCode);
-    printf("Start code accepted!\n");
-    return startCode;
-}
-
-// Enter ID code
-//  TODO change return type if necessary
-int enterIdCode(void)
-{
-    int idCode;
-    printf("Please enter your ID code: ");
-    scanf("%d", &idCode);
-    printf("ID code accepted! \n");
-    return idCode;
-}
+#include "input.h"
 
 void handleChoice(void)
 {

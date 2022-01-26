@@ -24,7 +24,11 @@ bool isLeapYear(date date);
  */
 bool checkDate(date date);
 
-// TODO Skriv förklaring
+/**
+ * @brief Function for user input of date.
+ *
+ * @returns A date struct.
+ */
 date enterDate(void);
 
 /**
@@ -68,5 +72,8 @@ date getNDaysPrevious(date date, int days);
  * @param date Pointer to the date to set to todays date.
  */
 void setToToday(date *date);
+
+// TODO dox
+bool isDateInFuture(date aDate);
 
 #endif

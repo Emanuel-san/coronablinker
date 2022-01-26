@@ -35,11 +35,11 @@ date enterDate(void)
     {
         printf("Enter date (DD.MM.YYYY): ");
         scanf("%d.%d.%d", &newDate.day, &newDate.month, &newDate.year);
-        if (!checkDate(newDate))
+        if (!checkDate(newDate) || isDateInFuture(newDate))
         {
-            printf("Invalid date, try again!\n");
+            printf("Invalid or unreasonable date, try again.\n");
         }
-    } while (!checkDate(newDate));
+    } while (!checkDate(newDate) || isDateInFuture(newDate));
 
     return newDate;
 }
@@ -121,4 +121,18 @@ void setToToday(date *date)
     date->day = timeinfo->tm_mday;
     date->month = timeinfo->tm_mon + 1;    // tm_mon is months since Januray e.g January=0
     date->year = timeinfo->tm_year + 1900; // tm_year is years since 1900
+}
+
+bool isDateInFuture(date aDate)
+{
+    date today;
+    setToToday(&today);
+    if (isBefore(today, aDate))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
