@@ -17,4 +17,7 @@ int enterIdCode(void);
  */
 bool validStartcode(int code);
 
+// TODO dox
+bool validIdcode(int code);
+
 #endif
