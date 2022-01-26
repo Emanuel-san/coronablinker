@@ -20,7 +20,8 @@ void handleChoice(void)
         printf("0. Quit\n");
 
         printf("Menu choice: ");
-        if (scanf("%d", &choice) != 1)
+        char term;
+        if (scanf("%d%c", &choice, &term) != 2 || term != '\n')
         {
             printf("Invalid choice!\n");
             fflush(stdin);
