@@ -23,14 +23,3 @@ int enterIdCode(void)
     return idCode;
 }
 
-bool isValidInput(int input)
-{
-    if (isdigit(input))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
