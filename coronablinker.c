@@ -1,8 +1,3 @@
-/* ToDo:
-- Kolla att man inte matar in bokstäver istället för siffror (ctype.h)
-- Hitta på bra begränsningar till startkod och IDkod
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "date.h"
