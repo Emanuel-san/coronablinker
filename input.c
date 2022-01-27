@@ -80,11 +80,11 @@ date enterDate(void)
         else
         {
             setDate(&newDate, day, month, year);
-        }
 
-        if (!checkDate(newDate) || isDateInFuture(newDate))
-        {
-            printf("Invalid or unreasonable date, try again.\n");
+            if (!checkDate(newDate) || isDateInFuture(newDate))
+            {
+                printf("Invalid or unreasonable date, try again.\n");
+            }
         }
 
     } while (!checkDate(newDate) || isDateInFuture(newDate));

@@ -24,6 +24,9 @@ bool isLeapYear(date date);
  */
 bool checkDate(date date);
 
+// TODO dox
+void setDate(date *date, int day, int month, int year);
+
 /**
  * Function for printing a date in Finnish standard format.
  * @param date The date to print.
