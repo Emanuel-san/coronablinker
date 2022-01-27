@@ -10,7 +10,7 @@
 
 int main(void)
 {
-    date date1;
+    date date1, date2;
 
     TEST_CASE("Testing setDate");
     setDate(&date1, 1, 2, 2021);
@@ -51,6 +51,66 @@ int main(void)
     printf("%d days in month %d year %d\n", getDaysPerMonth(date1), date1.month, date1.year);
     setDate(&date1, 29, 8, 2020);
     printf("%d days in month %d year %d\n", getDaysPerMonth(date1), date1.month, date1.year);
+
+    TEST_CASE("Testing isBefore");
+    setDate(&date2, 29, 3, 2020);
+    VERIFY(isBefore(date2, date1), "Date2 is before Date1");
+    VERIFY(!isBefore(date1, date2), "Date1 is not before Date2");
+    setDate(&date1, 29, 3, 2021);
+    VERIFY(isBefore(date2, date1), "Date2 is before Date1");
+    VERIFY(!isBefore(date1, date2), "Date1 is not before Date2");
+    setDate(&date1, 31, 3, 2020);
+    VERIFY(isBefore(date2, date1), "Date2 is before Date1");
+    VERIFY(!isBefore(date1, date2), "Date1 is not before Date2");
+
+    TEST_CASE("Testing getPreviousDay");
+    printf("Current date is ");
+    printFiStd(date1);
+    printf("   Yesterdays date was: ");
+    printFiStd(getPreviousDay(date1));
+    setDate(&date2, 1, 1, 2020);
+    printf("\nCurrent date is ");
+    printFiStd(date2);
+    printf("   Yesterdays date was: ");
+    printFiStd(getPreviousDay(date2));
+    setDate(&date2, 1, 3, 2020);
+    printf("\nCurrent date is ");
+    printFiStd(date2);
+    printf("   Yesterdays date was: ");
+    printFiStd(getPreviousDay(date2));
+    setDate(&date2, 1, 3, 2021);
+    printf("\nCurrent date is ");
+    printFiStd(date2);
+    printf("   Yesterdays date was: ");
+    printFiStd(getPreviousDay(date2));
+    setDate(&date2, 1, 2, 2021);
+    printf("\nCurrent date is ");
+    printFiStd(date2);
+    printf("   Yesterdays date was: ");
+    printFiStd(getPreviousDay(date2));
+    printf("\n");
+
+    TEST_CASE("Testing getNDaysPrevious");
+    setDate(&date2, 1, 2, 2021);
+    printf("Current date is ");
+    printFiStd(date2);
+    printf("   %d days ago the date was: ", 21);
+    printFiStd(getNDaysPrevious(date2, 21));
+    setDate(&date2, 30, 1, 2021);
+    printf("\nCurrent date is ");
+    printFiStd(date2);
+    printf("   %d days ago the date was: ", 10);
+    printFiStd(getNDaysPrevious(date2, 10));
+    setDate(&date2, 30, 1, 2021);
+    printf("\nCurrent date is ");
+    printFiStd(date2);
+    printf("   %d days ago the date was: ", 35);
+    printFiStd(getNDaysPrevious(date2, 35));
+    setDate(&date2, 28, 2, 2021);
+    printf("\nCurrent date is ");
+    printFiStd(date2);
+    printf("   %d days ago the date was: ", 75);
+    printFiStd(getNDaysPrevious(date2, 75));
 
     return 0;
 }

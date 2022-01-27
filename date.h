@@ -57,7 +57,7 @@ date getPreviousDay(date date);
 
 /**
  * Function for retreving the date a given number of days before the given date.
- * @param date The staring date.
+ * @param date The starting date.
  * @param days The number of days to go back
  * @returns The day that is the given number of days before the staring date
  */

@@ -62,6 +62,7 @@ int enterIdCode(void)
     printf("ID code accepted!\n");
     return idCode;
 }
+
 date enterDate(void)
 {
     date newDate;
