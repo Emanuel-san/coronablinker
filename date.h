@@ -24,7 +24,14 @@ bool isLeapYear(date date);
  */
 bool checkDate(date date);
 
-// TODO dox
+/**
+ * @brief Function to set a dates data with day, month and year.
+ *
+ * @param date Date data to be set.
+ * @param day Day that wils be set.
+ * @param month Month that wils be set.
+ * @param year Year that wils be set.
+ */
 void setDate(date *date, int day, int month, int year);
 
 /**
@@ -69,7 +76,12 @@ date getNDaysPrevious(date date, int days);
  */
 void setToToday(date *date);
 
-// TODO dox
+/**
+ * @brief Checks if a given date is before today.
+ *
+ * @param aDate Date to be checked.
+ * @returns true if the date given is before todays date, else false;
+ */
 bool isDateInFuture(date aDate);
 
 #endif

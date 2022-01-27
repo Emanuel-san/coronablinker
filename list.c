@@ -11,6 +11,7 @@ void createNewNode(idList *header, date aDate, int idCode)
 {
     idNode *newNode;
     newNode = (idNode *)malloc(sizeof(idNode));
+
     if (newNode == NULL)
     {
         printf("FAIL! Memory alocation failed!\n");

@@ -28,7 +28,7 @@ date enterDate(void);
  * @brief Function to validate that given startcode is a 6 digit number.
  *
  * @param code Startcode.
- * @returns True if code is correct, else false.
+ * @returns true if code is correct, else false.
  */
 
 bool validStartcode(int code);
@@ -37,7 +37,7 @@ bool validStartcode(int code);
  * @brief Function to validate that given startcode is a 7 digit number.
  *
  * @param code Identification code.
- * @returns True if code is correct, else false.
+ * @returns true if code is correct, else false.
  */
 bool validIdcode(int code);
 

@@ -41,7 +41,6 @@ void handleChoice(void)
 
                 break;
             case 3:
-                // TODO make function later if needed
                 printf("You've been exposed to corona!\n");
                 break;
             case 0:

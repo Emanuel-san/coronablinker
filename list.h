@@ -44,23 +44,41 @@ typedef idNode *idList;
 idList createList(void);
 
 /**
- * @brief Create a New Node object
+ * @brief Function to create a new ID node with ID data and insert it into the list.
  *
- * @param header
- * @param aDate
- * @param idCode
+ * @param header The ID list the node will be insereted into.
+ * @param aDate Date that will be inserted into nodes ID data.
+ * @param idCode ID code that will be inserted into nodes ID data.
  */
 void createNewNode(idList *header, date aDate, int idCode);
 
-// TODO dox
+/**
+ * @brief Function to print everything stored in the list.
+ *
+ * @param header ID list to print.
+ */
 void printListAll(idList header);
 
-// TODO dox
+/**
+ * @brief Function to delete ID codes that are older then a given amount of previous days set from todays date.
+ *
+ * @param header ID list to remove old id codes from.
+ * @param days amount of previous days.
+ */
 void deleteOldIdCodes(idList *header, int days);
 
-// TODO dox
+/**
+ * @brief Takes a list of IDs and frees all of its nodes in memory until its empty.
+ *
+ * @param header ID list to be cleared.
+ */
 void destroyList(idList *header);
 
-// TODO dox
+/**
+ * @brief Function to check if the list contains any nodes.
+ *
+ * @param header The list to check for nodes.
+ * @returns true if the list contains no nodes (empty list), else false.
+ */
 bool listIsEmpty(idList header);
 #endif
