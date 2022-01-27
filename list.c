@@ -34,6 +34,10 @@ void printListAll(idList header)
 {
     idNode *currentNode = header;
     printf("**********************\n");
+    if (listIsEmpty(header))
+    {
+        printf("List is empty\n");
+    }
     while (currentNode != NULL)
     {
         printFiStd(currentNode->data.date);
@@ -90,4 +94,21 @@ idList tempListTest(idList header)
         idCode += 212;
     }
     return header;
+}
+
+void destroyList(idList *header)
+{
+    idNode *currentNode = *header;
+
+    while (currentNode != NULL)
+    {
+        *header = currentNode->next;
+        free(currentNode);
+        currentNode = *header;
+    }
+}
+
+bool listIsEmpty(idList header)
+{
+    return (header == NULL);
 }

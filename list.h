@@ -51,6 +51,12 @@ void printListAll(idList header);
 
 // TODO dox
 void deleteOldIdCodes(idList *header, int days);
-
+// TODO dox
 idList tempListTest(idList header);
+
+// TODO dox
+void destroyList(idList *header);
+
+// TODO dox
+bool listIsEmpty(idList header);
 #endif

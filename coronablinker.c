@@ -46,6 +46,7 @@ void handleChoice(void)
                 printf("You've been exposed to corona!\n");
                 break;
             case 0:
+                destroyList(&list);
                 printf("Good bye! Dont get sick, stay home, clean your hands, stay safe!\n");
                 exit(1);
             default:
