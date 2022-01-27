@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "date.h"
 #include "input.h"
-
+#include "list.h"
 void handleChoice(void)
 {
     int choice = 0;
     int startCode, idCode;
     date newDate;
+    idList list = createList();
+
+    do
     {
         printf("1. Enter Startcode\n");
         printf("2. Enter ID code and date\n");
@@ -31,9 +33,11 @@ void handleChoice(void)
                 break;
             case 2:
                 idCode = enterIdCode();
-                printf("%d\n", idCode);
+                // printf("%d\n", idCode);
                 newDate = enterDate();
-                printf("%d.%d.%d\n", newDate.day, newDate.month, newDate.year);
+                // printf("%d.%d.%d\n", newDate.day, newDate.month, newDate.year);
+                createNewNode(&list, newDate, idCode);
+
                 break;
             case 3:
                 // TODO make function later if needed
@@ -46,14 +50,13 @@ void handleChoice(void)
                 printf("Invalid choice!\n");
             }
         }
-    }
+    } while (1);
 }
 
 int main(void)
 {
-    while (1)
-    {
-        handleChoice();
-    }
+
+    handleChoice();
+
     return 0;
 }

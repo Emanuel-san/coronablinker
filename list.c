@@ -29,3 +29,15 @@ void createNewNode(idList *header, date aDate, int idCode)
         *header = newNode;
     }
 }
+
+void printListAll(idList header)
+{
+    idNode *currentNode = header;
+
+    while (currentNode != NULL)
+    {
+        printFiStd(currentNode->data.date);
+        printf(" ID: %d\n", currentNode->data.idCode);
+        currentNode = currentNode->next;
+    }
+}

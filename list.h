@@ -3,7 +3,6 @@
 
 #include "date.h"
 
-
 typedef struct idDataStruct
 {
     date date;
@@ -21,10 +20,13 @@ typedef struct idNodeStruct idNode;
 
 typedef idNode *idList;
 
-//TODO dox
+// TODO dox
 idList createList(void);
 
-//TODO DOX
-void createNewNode(idList* header, date aDate, int idCode);
+// TODO DOX
+void createNewNode(idList *header, date aDate, int idCode);
+
+// TODO dox
+void printListAll(idList header);
 
 #endif
