@@ -25,13 +25,6 @@ bool isLeapYear(date date);
 bool checkDate(date date);
 
 /**
- * @brief Function for user input of date.
- *
- * @returns A date struct.
- */
-date enterDate(void);
-
-/**
  * Function for printing a date in Finnish standard format.
  * @param date The date to print.
  */

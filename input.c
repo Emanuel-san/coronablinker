@@ -62,6 +62,35 @@ int enterIdCode(void)
     printf("ID code accepted!\n");
     return idCode;
 }
+date enterDate(void)
+{
+    date newDate;
+    int day, month, year;
+    do
+    {
+        printf("Enter date (DD.MM.YYYY): ");
+        char term;
+        if (scanf("%d.%d.%d%c", &day, &month, &year, &term) != 4 || term != '\n')
+        {
+            printf("Invalid!\n");
+            fflush(stdin);
+            // If input was wrong we change day to 0 to invalidate checkDate function in the while loop.
+            newDate.day = 0;
+        }
+        else
+        {
+            setDate(&newDate, day, month, year);
+        }
+
+        if (!checkDate(newDate) || isDateInFuture(newDate))
+        {
+            printf("Invalid or unreasonable date, try again.\n");
+        }
+
+    } while (!checkDate(newDate) || isDateInFuture(newDate));
+
+    return newDate;
+}
 
 bool validStartcode(int code)
 {

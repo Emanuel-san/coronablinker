@@ -18,11 +18,19 @@ int enterStartCode(void);
 int enterIdCode(void);
 
 /**
+ * @brief Function for user input of date.
+ *
+ * @returns A date struct.
+ */
+date enterDate(void);
+
+/**
  * @brief Function to validate that given startcode is a 6 digit number.
  *
  * @param code Startcode.
  * @returns True if code is correct, else false.
  */
+
 bool validStartcode(int code);
 
 /**

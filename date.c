@@ -27,30 +27,8 @@ bool checkDate(date date)
     // true if day, month and year is correct, else false
     return (date.day > 0 && date.day <= getDaysPerMonth(date)) && (date.month > 0 && date.month <= 12) && date.year > 2019;
 }
-
-date enterDate(void)
+void setDate(date *date, int day, int month, int year)
 {
-    date newDate;
-
-    do
-    {
-        printf("Enter date (DD.MM.YYYY): ");
-        char term;
-        if (scanf("%d.%d.%d%c", &newDate.day, &newDate.month, &newDate.year, &term) != 4 || term != '\n')
-        {
-            printf("Invalid!\n");
-            fflush(stdin);
-            // If input was wrong we change day to 0 to invalidate checkDate function in the while loop.
-            newDate.day = 0;
-        }
-        else if (!checkDate(newDate) || isDateInFuture(newDate))
-        {
-            printf("Invalid or unreasonable date, try again.\n");
-        }
-
-    } while (!checkDate(newDate) || isDateInFuture(newDate));
-
-    return newDate;
 }
 
 void printFiStd(date date)
