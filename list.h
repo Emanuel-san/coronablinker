@@ -3,21 +3,28 @@
 
 #include "date.h"
 
-typedef struct id_data_struct
+
+typedef struct idDataStruct
 {
     date date;
-    int id_code;
+    int idCode;
 
-} id_data;
+} idData;
 
-struct id_node_struct
+struct idNodeStruct
 {
-    id_data data;
-    struct id_node_struct *next;
+    idData data;
+    struct idNodeStruct *next;
 };
 
-typedef struct id_node_struct id_node;
+typedef struct idNodeStruct idNode;
 
-typedef id_node *header;
+typedef idNode *idList;
+
+//TODO dox
+idList createList(void);
+
+//TODO DOX
+void createNewNode(idList* header, date aDate, int idCode);
 
 #endif
