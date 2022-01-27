@@ -80,22 +80,6 @@ void deleteOldIdCodes(idList *header, int days)
     }
 }
 
-idList tempListTest(idList header)
-{
-
-    date newDate;
-    int idCode = 1234546;
-    setToToday(&newDate);
-
-    for (int i = 0; i < 30; i++)
-    {
-        createNewNode(&header, newDate, idCode);
-        newDate = getPreviousDay(newDate);
-        idCode += 212;
-    }
-    return header;
-}
-
 void destroyList(idList *header)
 {
     idNode *currentNode = *header;

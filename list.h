@@ -43,7 +43,13 @@ typedef idNode *idList;
  */
 idList createList(void);
 
-// TODO DOX
+/**
+ * @brief Create a New Node object
+ *
+ * @param header
+ * @param aDate
+ * @param idCode
+ */
 void createNewNode(idList *header, date aDate, int idCode);
 
 // TODO dox
@@ -51,8 +57,6 @@ void printListAll(idList header);
 
 // TODO dox
 void deleteOldIdCodes(idList *header, int days);
-// TODO dox
-idList tempListTest(idList header);
 
 // TODO dox
 void destroyList(idList *header);

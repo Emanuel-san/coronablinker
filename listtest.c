@@ -2,6 +2,22 @@
 #include "input.h"
 #include <stdio.h>
 
+idList tempListTest(idList header, int nodes)
+{
+
+    date newDate;
+    int idCode = 1234546;
+    setToToday(&newDate);
+
+    for (int i = 0; i < nodes; i++)
+    {
+        createNewNode(&header, newDate, idCode);
+        newDate = getPreviousDay(newDate);
+        idCode += 212;
+    }
+    return header;
+}
+
 #define TEST_CASE(name) printf("\nRUNNING CASE: %s\n", name)
 #define VERIFY(cond, msg)             \
     if (cond)                         \
@@ -27,17 +43,23 @@ int main(void)
     TEST_CASE("Testing printListAll");
     printListAll(list);
 
-    // Insert some more nodes
-    date1 = getPreviousDay(date1);
-    createNewNode(&list, date1, idCode + 4157);
-    date1 = getPreviousDay(date1);
-    createNewNode(&list, date1, idCode + 25698);
-    date1 = getPreviousDay(date1);
-    createNewNode(&list, date1, idCode + 5658421);
-    date1 = getPreviousDay(date1);
-    createNewNode(&list, date1, idCode + 1);
-
     TEST_CASE("Testing printListAll with more nodes");
+    // Insert some more nodes
+    list = tempListTest(list, 5);
+    printListAll(list);
+
+    TEST_CASE("Testing destroyList");
+    destroyList(&list);
+    VERIFY(listIsEmpty(list), "List is empty");
+
+    TEST_CASE("Testing deletingOldIdCodes");
+    list = tempListTest(list, 30);
+    printListAll(list);
+    printf("Deleting codes older then %d days\n", 21);
+    deleteOldIdCodes(&list, 21);
+    printListAll(list);
+    printf("Deleting codes older then %d days\n", 30);
+    deleteOldIdCodes(&list, 30);
     printListAll(list);
 
     return 0;
