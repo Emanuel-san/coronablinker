@@ -2,13 +2,13 @@
 #include <time.h>
 #include <stdio.h>
 
+const int daysInMonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
 bool isLeapYear(date date)
 {
     // true if the year i divisible by 4 but not by both 4 and 100, except if its also divisible by 400.
     return date.year % 4 == 0 && (date.year % 100 != 0 || date.year % 400 == 0);
 }
-
-int daysInMonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 int getDaysPerMonth(date date)
 {
@@ -31,7 +31,7 @@ bool checkDate(date date)
 date enterDate(void)
 {
     date newDate;
-    bool goOn = true;
+
     do
     {
         printf("Enter date (DD.MM.YYYY): ");
@@ -40,16 +40,15 @@ date enterDate(void)
         {
             printf("Invalid!\n");
             fflush(stdin);
+            // If input was wrong we change day to 0 to invalidate checkDate function in the while loop.
+            newDate.day = 0;
         }
         else if (!checkDate(newDate) || isDateInFuture(newDate))
         {
             printf("Invalid or unreasonable date, try again.\n");
         }
-        else
-        {
-            goOn = false;
-        }
-    } while (!checkDate(newDate) || isDateInFuture(newDate) || goOn == true);
+
+    } while (!checkDate(newDate) || isDateInFuture(newDate));
 
     return newDate;
 }
@@ -104,7 +103,7 @@ date getPreviousDay(date date)
     }
     else
     {
-        // Not in beginning of month, just decrese day.
+        // Not in beginning of month, just decrease day.
         date.day -= 1;
     }
     return date;
