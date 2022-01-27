@@ -3,6 +3,10 @@
 
 #include "date.h"
 
+/**
+ * @brief Datatype for storing ID data such as date and identification code.
+ *
+ */
 typedef struct idDataStruct
 {
     date date;
@@ -10,17 +14,33 @@ typedef struct idDataStruct
 
 } idData;
 
+/**
+ * @brief Struct for storing a ID list node
+ *
+ */
 struct idNodeStruct
 {
     idData data;
     struct idNodeStruct *next;
 };
 
+/**
+ * @brief Datatype for one ID node in the list.
+ *
+ */
 typedef struct idNodeStruct idNode;
 
+/**
+ * @brief Datatype for a ID list.
+ *
+ */
 typedef idNode *idList;
 
-// TODO dox
+/**
+ * @brief Create an empty ID list.
+ *
+ * @returns An empty header
+ */
 idList createList(void);
 
 // TODO DOX
