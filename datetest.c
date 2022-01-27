@@ -111,6 +111,23 @@ int main(void)
     printFiStd(date2);
     printf("   %d days ago the date was: ", 75);
     printFiStd(getNDaysPrevious(date2, 75));
+    printf("\n");
 
+    TEST_CASE("Testing setToToday");
+    setToToday(&date1);
+    printf("Today is: ");
+    printFiStd(date1);
+    printf("\n");
+
+    TEST_CASE("Testing isDateInFuture");
+    VERIFY(!isDateInFuture(date1), "Date is not in future");
+    setDate(&date1, 28, 2, 2021);
+    VERIFY(!isDateInFuture(date1), "Date is not in future");
+    setDate(&date1, 28, 2, 2023);
+    VERIFY(isDateInFuture(date1), "Date is in future");
+    setDate(&date1, 28, 1, 2022);
+    VERIFY(isDateInFuture(date1), "Date is in future");
+    setDate(&date1, 26, 1, 2022);
+    VERIFY(!isDateInFuture(date1), "Date is not in future");
     return 0;
 }
