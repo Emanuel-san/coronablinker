@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "input.h"
 #include "list.h"
+
+#define DAYS 21
+
 void handleChoice(void)
 {
     int choice = 0;
@@ -29,13 +32,12 @@ void handleChoice(void)
             {
             case 1:
                 startCode = enterStartCode();
-                printf("%d\n", startCode);
+                deleteOldIdCodes(&list, DAYS);
+                printListAll(list);
                 break;
             case 2:
                 idCode = enterIdCode();
-                // printf("%d\n", idCode);
                 newDate = enterDate();
-                // printf("%d.%d.%d\n", newDate.day, newDate.month, newDate.year);
                 createNewNode(&list, newDate, idCode);
 
                 break;

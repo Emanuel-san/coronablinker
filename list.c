@@ -41,3 +41,35 @@ void printListAll(idList header)
         currentNode = currentNode->next;
     }
 }
+
+void deleteOldIdCodes(idList *header, int days)
+{
+    idNode *currentNode = *header;
+    idNode *previousNode = NULL;
+    date today, nDaysPrevious;
+    setToToday(&today);
+    nDaysPrevious = getNDaysPrevious(today, days);
+
+    while (currentNode != NULL)
+    {
+        if (isBefore(currentNode->data.date, nDaysPrevious))
+        {
+            if (previousNode == NULL)
+            {
+                *header=currentNode->next;
+                free(currentNode);
+                currentNode=*header;
+            }
+            else{
+                previousNode->next=currentNode->next;
+                free(currentNode);
+                currentNode=previousNode->next;
+            }
+
+        }
+        else{
+            previousNode=currentNode;
+            currentNode=currentNode->next;
+        }
+    }
+}

@@ -29,4 +29,6 @@ void createNewNode(idList *header, date aDate, int idCode);
 // TODO dox
 void printListAll(idList header);
 
+//TODO dox
+void deleteOldIdCodes(idList * header, int days);
 #endif
