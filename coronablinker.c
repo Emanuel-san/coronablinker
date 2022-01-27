@@ -11,7 +11,7 @@ void handleChoice(void)
     int startCode, idCode;
     date newDate;
     idList list = createList();
-
+    list = tempListTest(list);
     do
     {
         printf("1. Enter Startcode\n");

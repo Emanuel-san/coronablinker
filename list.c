@@ -33,13 +33,14 @@ void createNewNode(idList *header, date aDate, int idCode)
 void printListAll(idList header)
 {
     idNode *currentNode = header;
-
+    printf("**********************\n");
     while (currentNode != NULL)
     {
         printFiStd(currentNode->data.date);
         printf(" ID: %d\n", currentNode->data.idCode);
         currentNode = currentNode->next;
     }
+    printf("**********************\n");
 }
 
 void deleteOldIdCodes(idList *header, int days)
@@ -56,20 +57,37 @@ void deleteOldIdCodes(idList *header, int days)
         {
             if (previousNode == NULL)
             {
-                *header=currentNode->next;
+                *header = currentNode->next;
                 free(currentNode);
-                currentNode=*header;
+                currentNode = *header;
             }
-            else{
-                previousNode->next=currentNode->next;
+            else
+            {
+                previousNode->next = currentNode->next;
                 free(currentNode);
-                currentNode=previousNode->next;
+                currentNode = previousNode->next;
             }
-
         }
-        else{
-            previousNode=currentNode;
-            currentNode=currentNode->next;
+        else
+        {
+            previousNode = currentNode;
+            currentNode = currentNode->next;
         }
     }
+}
+
+idList tempListTest(idList header)
+{
+
+    date newDate;
+    int idCode = 1234546;
+    setToToday(&newDate);
+
+    for (int i = 0; i < 30; i++)
+    {
+        createNewNode(&header, newDate, idCode);
+        newDate = getPreviousDay(newDate);
+        idCode += 212;
+    }
+    return header;
 }

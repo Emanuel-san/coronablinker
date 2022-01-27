@@ -32,7 +32,7 @@ int enterStartCode(void)
 
     } while (!validStartcode(startCode));
 
-    printf("Start code accepted!\n");
+    printf("**********************\nStart code accepted! Compressing data and sending to server.\n");
     return startCode;
 }
 
@@ -59,7 +59,7 @@ int enterIdCode(void)
             printf("Invalid idcode.\n");
         }
     } while (!validIdcode(idCode));
-    printf("ID code accepted! \n");
+    printf("ID code accepted!\n");
     return idCode;
 }
 
