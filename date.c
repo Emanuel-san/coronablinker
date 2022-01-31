@@ -4,13 +4,13 @@
 
 const int daysInMonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-bool isLeapYear(date date) // tested
+bool isLeapYear(date date)
 {
     // true if the year i divisible by 4 but not by both 4 and 100, except if its also divisible by 400.
     return date.year % 4 == 0 && (date.year % 100 != 0 || date.year % 400 == 0);
 }
 
-int getDaysPerMonth(date date) // tested
+int getDaysPerMonth(date date)
 {
     if (date.month == 2 && isLeapYear(date))
     {
@@ -22,20 +22,20 @@ int getDaysPerMonth(date date) // tested
     }
 }
 
-bool checkDate(date date) // tested
+bool checkDate(date date)
 {
     // true if day, month and year is correct, else false
     return (date.day > 0 && date.day <= getDaysPerMonth(date)) && (date.month > 0 && date.month <= 12) && date.year > 2019;
 }
 
-void setDate(date *date, int day, int month, int year) // tested
+void setDate(date *date, int day, int month, int year)
 {
     date->day = day;
     date->month = month;
     date->year = year;
 }
 
-void printFiStd(date date) // tested
+void printFiStd(date date)
 {
     printf("%d.%d.%d", date.day, date.month, date.year);
 }

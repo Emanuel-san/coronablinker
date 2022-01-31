@@ -63,10 +63,10 @@ int getDaysPerMonth(date date);
 date getPreviousDay(date date);
 
 /**
- * Function for retreving the date a given number of days before the given date.
+ * Function for retreving the date for a given number of days before the given date.
  * @param date The starting date.
  * @param days The number of days to go back
- * @returns The day that is the given number of days before the staring date
+ * @returns The date that is a given number of days before the given date
  */
 date getNDaysPrevious(date date, int days);
 

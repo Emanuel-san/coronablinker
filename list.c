@@ -19,7 +19,7 @@ void createNewNode(idList *header, date aDate, int idCode)
     }
     newNode->data.date = aDate;
     newNode->data.idCode = idCode;
-    if (*header == NULL)
+    if (*header == NULL) // empty list
     {
         *header = newNode;
         newNode->next = NULL;
@@ -58,22 +58,22 @@ void deleteOldIdCodes(idList *header, int days)
 
     while (currentNode != NULL)
     {
-        if (isBefore(currentNode->data.date, nDaysPrevious))
+        if (isBefore(currentNode->data.date, nDaysPrevious)) // if node date is before the given date
         {
-            if (previousNode == NULL)
+            if (previousNode == NULL) // if there's no previous node, move header to the next node and free currentNode.
             {
                 *header = currentNode->next;
                 free(currentNode);
                 currentNode = *header;
             }
-            else
+            else // else set previous nodes next pointer to jump over currentNode and free currentNode.
             {
                 previousNode->next = currentNode->next;
                 free(currentNode);
                 currentNode = previousNode->next;
             }
         }
-        else
+        else // iterate both nodes forward
         {
             previousNode = currentNode;
             currentNode = currentNode->next;

@@ -47,12 +47,9 @@ int enterIdCode(void)
 
         if (scanf("%d%c", &idCode, &term) != 2 || term != '\n')
         {
-            {
-
-                printf("Invalid input.\n");
-                fflush(stdin);
-                idCode = 0;
-            }
+            printf("Invalid input.\n");
+            fflush(stdin);
+            idCode = 0;
         }
         else if (!validIdcode(idCode))
         {
