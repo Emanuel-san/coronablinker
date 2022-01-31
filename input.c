@@ -10,30 +10,28 @@
 #endif
 
 // TODO change return type if necessary
-int enterStartCode(void)
+void enterStartCode(int *startcode)
 {
 
-    int startCode;
     do
     {
         printf("Please enter your start code: ");
         char term;
-        if (scanf("%d%c", &startCode, &term) != 2 || term != '\n')
+        if (scanf("%d%c", startcode, &term) != 2 || term != '\n')
         {
             printf("Invalid input.\n");
             fflush(stdin);
-            startCode = 0;
+            *startcode = 0;
         }
 
-        else if (!validStartcode(startCode))
+        else if (!validStartcode(*startcode))
         {
             printf("Invalid startcode.\n");
         }
 
-    } while (!validStartcode(startCode));
+    } while (!validStartcode(*startcode));
 
     printf("**********************\nStart code accepted! Compressing data and sending to server.\n");
-    return startCode;
 }
 
 //  TODO change return type if necessary

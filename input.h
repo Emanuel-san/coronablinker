@@ -8,7 +8,7 @@
  *
  * @returns an accepted startcode.
  */
-int enterStartCode(void);
+void enterStartCode(int *startcode);
 
 /**
  * @brief Function to simulate input of a units identification code by manual input.

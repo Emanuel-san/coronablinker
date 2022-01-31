@@ -3,12 +3,12 @@
 #include "input.h"
 #include "list.h"
 
-#define DAYS 21
+#define DAYS_IN_RANGE 21
 
 void handleChoice(void)
 {
     int choice = 0;
-    int startCode, idCode;
+    int idCode, startCode;
     date newDate;
     idList list = createList();
     do
@@ -30,8 +30,8 @@ void handleChoice(void)
             switch (choice)
             {
             case 1:
-                startCode = enterStartCode();
-                deleteOldIdCodes(&list, DAYS);
+                enterStartCode(&startCode);
+                deleteOldIdCodes(&list, DAYS_IN_RANGE);
                 printListAll(list);
                 break;
             case 2:
