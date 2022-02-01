@@ -8,7 +8,7 @@
 void handleChoice(void)
 {
     int choice = 0;
-    int idCode, startCode;
+    int idCode=0, startCode=0;
     date newDate;
     idList list = createList();
     do
@@ -35,7 +35,7 @@ void handleChoice(void)
                 printListAll(list);
                 break;
             case 2:
-                idCode = enterIdCode();
+                enterIdCode(&idCode);
                 newDate = enterDate();
                 createNewNode(&list, newDate, idCode);
 

@@ -5,17 +5,17 @@
 
 /**
  * @brief Function for entering a startcode.
+ * @param startCode A pointer to the start code we want to change
  *
- * @returns an accepted startcode.
  */
-void enterStartCode(int *startcode);
+void enterStartCode(int *startCode);
 
 /**
  * @brief Function to simulate input of a units identification code by manual input.
+ * @param idCode A pointer to the ID code we want to change
  *
- * @returns an accepted identification code.
  */
-int enterIdCode(void);
+void enterIdCode(int *idCode);
 
 /**
  * @brief Function for user input of date.

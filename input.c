@@ -35,27 +35,24 @@ void enterStartCode(int *startcode)
 }
 
 //  TODO change return type if necessary
-int enterIdCode(void)
+void enterIdCode(int *idCode)
 {
-    int idCode;
-    char term;
     do
     {
         printf("Please enter your ID code: ");
-
-        if (scanf("%d%c", &idCode, &term) != 2 || term != '\n')
+        char term;
+        if (scanf("%d%c", idCode, &term) != 2 || term != '\n')
         {
             printf("Invalid input.\n");
             fflush(stdin);
-            idCode = 0;
+            *idCode = 0;
         }
-        else if (!validIdcode(idCode))
+        else if (!validIdcode(*idCode))
         {
             printf("Invalid idcode.\n");
         }
-    } while (!validIdcode(idCode));
+    } while (!validIdcode(*idCode));
     printf("ID code accepted!\n");
-    return idCode;
 }
 
 date enterDate(void)
