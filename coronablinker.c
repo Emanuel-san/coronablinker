@@ -12,15 +12,16 @@ void handleChoice(void)
     date newDate;
     idList list = createList();
     char *filename = "IDCodes.txt";
-    FILE *fileptr = fopen(filename, "w");
-    // FILE *fileptr = fopen("IDCodes.txt", "r");
-    // if (fileptr == NULL)
-    // {
-    //     printf("WARNING! Could not open file! Starting with empty list\n");
-    // }
-    // else
-    // {
-    // }
+    FILE *fileptr = fopen(filename, "r");
+    if (fileptr == NULL)
+    {
+        printf("WARNING! Could not open file! Starting with empty list\n");
+    }
+    else
+    {
+        list = listReadFromFile(fileptr, list);
+        fclose(fileptr);
+    }
     do
     {
         printf("1. Enter Startcode\n");

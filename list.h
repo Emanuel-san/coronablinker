@@ -61,6 +61,14 @@ void createNewNode(idList *header, date aDate, int idCode);
 void listWriteToFile(FILE *filePtr, idList list);
 
 /**
+ * @brief
+ *
+ * @param filePtr
+ * @param list
+ */
+idList listReadFromFile(FILE *filePtr, idList list);
+
+/**
  * @brief Function to print everything stored in the list.
  *
  * @param header ID list to print.

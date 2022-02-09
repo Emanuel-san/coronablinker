@@ -45,6 +45,23 @@ void listWriteToFile(FILE *filePtr, idList list)
     }
 }
 
+idList listReadFromFile(FILE *filePtr, idList list)
+{
+    date newDate;
+    int idCode, fieldsRead = 0;
+
+    do
+    {
+        fieldsRead = fscanf(filePtr, "id: %d date: %d.%d.%d\n", &idCode, &newDate.day, &newDate.month, &newDate.year);
+        if (fieldsRead == 4)
+        {
+            createNewNode(&list, newDate, idCode);
+        }
+    } while (fieldsRead == 4);
+
+    return list;
+}
+
 void printListAll(idList header)
 {
     idNode *currentNode = header;
