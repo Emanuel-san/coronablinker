@@ -21,6 +21,7 @@ void handleChoice(void)
     {
         list = listReadFromFile(fileptr, list);
         fclose(fileptr);
+        deleteOldIdCodes(&list, DAYS_IN_RANGE);
     }
     do
     {
@@ -43,7 +44,9 @@ void handleChoice(void)
             case 1:
                 enterStartCode(&startCode);
                 deleteOldIdCodes(&list, DAYS_IN_RANGE);
-                printListAll(list);
+                // printListAll(list);
+                // skicka ID +start
+
                 break;
             case 2:
                 enterIdCode(&idCode);
@@ -53,6 +56,7 @@ void handleChoice(void)
                 break;
             case 3:
                 printf("You've been exposed to corona!\n");
+
                 break;
             case 0:
                 fileptr = fopen(filename, "w");
@@ -62,6 +66,7 @@ void handleChoice(void)
                 }
                 else
                 {
+                    deleteOldIdCodes(&list, DAYS_IN_RANGE);
                     listWriteToFile(fileptr, list);
                     fclose(fileptr);
                 }

@@ -123,5 +123,26 @@ int main(void)
     VERIFY(isDateInFuture(date1), "Date is in future");
     setDate(&date1, 26, 1, 2022);
     VERIFY(!isDateInFuture(date1), "Date is not in future");
+    printf("\n");
+
+    TEST_CASE("Testing isAfter");
+    setDate(&date2, 10, 2, 2020);
+    setDate(&date1, 20, 2, 2020);
+    VERIFY(isAfter(date1, date2), "Different days, are after");
+    setDate(&date1, 5, 2, 2020);
+    VERIFY(!isAfter(date1, date2), "Different days, are not after");
+
+    setDate(&date1, 10, 3, 2020);
+    VERIFY(isAfter(date1, date2), "Different months, are after");
+    setDate(&date1, 10, 1, 2020);
+    VERIFY(!isAfter(date1, date2), "Different months, are not after");
+
+    setDate(&date1, 10, 2, 2021);
+    VERIFY(isAfter(date1, date2), "Different years, are after");
+    setDate(&date1, 10, 1, 2019);
+    VERIFY(!isAfter(date1, date2), "Different years, are not after");
+
+    setDate(&date1, 10, 2, 2020);
+    VERIFY(!isAfter(date1, date2), "Date is not after itself (equal)");
     return 0;
 }

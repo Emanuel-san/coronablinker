@@ -31,7 +31,7 @@ void enterStartCode(int *startcode)
 
     } while (!validStartcode(*startcode));
 
-    printf("**********************\nStart code accepted! Compressing data and sending to server.\n");
+    printf("**********************\nSending ID- and startcode to server.\n");
 }
 
 //  TODO change return type if necessary
