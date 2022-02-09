@@ -24,7 +24,7 @@ void createNewNode(idList *header, date aDate, int idCode)
         *header = newNode;
         newNode->next = NULL;
     }
-    else
+    else // insert new node as header
     {
         newNode->next = *header;
         *header = newNode;

@@ -8,7 +8,7 @@
 void handleChoice(void)
 {
     int choice = 0;
-    int idCode=0, startCode=0;
+    int idCode = 0, startCode = 0;
     date newDate;
     idList list = createList();
     do
