@@ -15,15 +15,18 @@ void enterStartCode(int *startcode)
 
     do
     {
-        printf("Please enter your start code: ");
+        printf("Please enter your start code (0 to go back): ");
         char term;
         if (scanf("%d%c", startcode, &term) != 2 || term != '\n')
         {
             printf("Invalid input.\n");
             fflush(stdin);
-            *startcode = 0;
+            *startcode = 1;
         }
-
+        else if (*startcode == 0)
+        {
+            return;
+        }
         else if (!validStartcode(*startcode))
         {
             printf("Invalid startcode.\n");
@@ -39,13 +42,17 @@ void enterIdCode(int *idCode)
 {
     do
     {
-        printf("Please enter your ID code: ");
+        printf("Please enter your ID code (0 to go back): ");
         char term;
         if (scanf("%d%c", idCode, &term) != 2 || term != '\n')
         {
             printf("Invalid input.\n");
             fflush(stdin);
-            *idCode = 0;
+            *idCode = 1;
+        }
+        else if (*idCode == 0)
+        {
+            return;
         }
         else if (!validIdcode(*idCode))
         {

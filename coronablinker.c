@@ -9,6 +9,7 @@ void handleChoice(void)
 {
     int choice = 0;
     int idCode = 0, startCode = 0;
+    int yourIdCode = 9999999;
     date newDate;
     idList list = createList();
     char *filename = "IDCodes.txt";
@@ -43,16 +44,20 @@ void handleChoice(void)
             {
             case 1:
                 enterStartCode(&startCode);
-                deleteOldIdCodes(&list, DAYS_IN_RANGE);
-                // printListAll(list);
-                // skicka ID +start
-
+                if (startCode != 0)
+                {
+                    deleteOldIdCodes(&list, DAYS_IN_RANGE);
+                    // printListAll(list);
+                    printf("Startcode: %d, your IDcode: %d.\n", startCode, yourIdCode);
+                }
                 break;
             case 2:
                 enterIdCode(&idCode);
-                newDate = enterDate();
-                createNewNode(&list, newDate, idCode);
-
+                if (idCode != 0)
+                {
+                    newDate = enterDate();
+                    createNewNode(&list, newDate, idCode);
+                }
                 break;
             case 3:
                 printf("You've been exposed to corona!\n");
