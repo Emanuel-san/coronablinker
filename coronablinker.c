@@ -11,6 +11,14 @@ void handleChoice(void)
     int idCode = 0, startCode = 0;
     date newDate;
     idList list = createList();
+    FILE *fileptr = fopen("IDCodes.txt", "r");
+    if (fileptr == NULL)
+    {
+        printf("WARNING! Could not open file! Starting with empty list\n");
+    }
+    else{
+        
+    }
     do
     {
         printf("1. Enter Startcode\n");

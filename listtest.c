@@ -1,6 +1,7 @@
 #include "list.h"
 #include "date.h"
 #include <stdio.h>
+#include"unittest.h"
 
 idList tempListTest(idList header, int nodes)
 {
@@ -17,13 +18,6 @@ idList tempListTest(idList header, int nodes)
     }
     return header;
 }
-
-#define TEST_CASE(name) printf("\nRUNNING CASE: %s\n", name)
-#define VERIFY(cond, msg)             \
-    if (cond)                         \
-        printf("SUCCESS: %s\n", msg); \
-    else                              \
-        printf("FAIL: %s\n", msg);
 
 int main(void)
 {

@@ -37,10 +37,10 @@ all: coronablinker.exe listtest.exe datetest.exe
 
 #Test targets
 
-datetest.o: datetest.c date.h
+datetest.o: datetest.c date.h unittest.h
 	gcc $(CFLAGS) -c datetest.c -o datetest.o
 
-listtest.o: listtest.c list.h date.h
+listtest.o: listtest.c list.h date.h unittest.h
 	gcc $(CFLAGS) -c listtest.c -o listtest.o
 
 datetest.exe: datetest.o date.o
