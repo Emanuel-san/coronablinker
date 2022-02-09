@@ -40,6 +40,11 @@ void printFiStd(date date)
     printf("%d.%d.%d", date.day, date.month, date.year);
 }
 
+bool isAfter(date first, date second)
+{
+    return isBefore(second, first);
+}
+
 bool isBefore(date first, date second)
 {
     if (first.year < second.year)

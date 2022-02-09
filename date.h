@@ -40,6 +40,8 @@ void setDate(date *date, int day, int month, int year);
  */
 void printFiStd(date date);
 
+bool isAfter(date first, date second);
+
 /**
  * @brief Function for comparing two dates to see if one is before the other.
  * @param first The date we want to check if it is first in time.
