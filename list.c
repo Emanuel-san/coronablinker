@@ -79,13 +79,22 @@ void printListAll(idList header)
     printf("**********************\n");
 }
 
+date getTwentyOneDaysLater(int days)
+{
+    date today;
+    setToToday(&today);
+    return getNDaysPrevious(today, days);
+}
+
 void deleteOldIdCodes(idList *header, int days)
 {
     idNode *currentNode = *header;
     idNode *previousNode = NULL;
-    date today, nDaysPrevious;
-    setToToday(&today);
-    nDaysPrevious = getNDaysPrevious(today, days);
+    date nDaysPrevious;
+    // date today, nDaysPrevious;
+    // setToToday(&today);
+    // nDaysPrevious = getNDaysPrevious(today, days);
+    nDaysPrevious = getTwentyOneDaysLater(days);
 
     while (currentNode != NULL)
     {

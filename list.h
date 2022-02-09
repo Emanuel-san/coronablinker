@@ -76,6 +76,14 @@ idList listReadFromFile(FILE *filePtr, idList list);
 void printListAll(idList header);
 
 /**
+ * @brief Get the Twenty One Days Later object
+ *
+ * @param days
+ * @return date
+ */
+date getTwentyOneDaysLater(int days);
+
+/**
  * @brief Function to delete ID codes that are older then a given amount of previous days set from todays date.
  *
  * @param header ID list to remove old id codes from.
