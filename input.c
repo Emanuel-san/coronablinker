@@ -58,7 +58,6 @@ void enterIdCode(int *idCode)
 date enterDate(void)
 {
     date newDate;
-    // nt day, month, year;
     do
     {
         printf("Enter date (DD.MM.YYYY): ");
@@ -72,9 +71,6 @@ date enterDate(void)
         }
         else
         {
-            printf("Am i in\n");
-            // setDate(&newDate, day, month, year);
-
             if (!checkDate(newDate) || isDateInFuture(newDate))
             {
                 printf("Invalid or unreasonable date, try again.\n");
