@@ -32,6 +32,19 @@ void createNewNode(idList *header, date aDate, int idCode)
     }
 }
 
+void listWriteToFile(FILE *filePtr, idList list)
+{
+
+    idNode *currentNode = list;
+
+    while (currentNode != NULL)
+    {
+
+        fprintf(filePtr, "id: %d date: %d.%d.%d\n", currentNode->data.idCode, currentNode->data.date.day, currentNode->data.date.month, currentNode->data.date.year);
+        currentNode = currentNode->next;
+    }
+}
+
 void printListAll(idList header)
 {
     idNode *currentNode = header;

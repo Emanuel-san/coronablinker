@@ -11,14 +11,16 @@ void handleChoice(void)
     int idCode = 0, startCode = 0;
     date newDate;
     idList list = createList();
-    FILE *fileptr = fopen("IDCodes.txt", "r");
-    if (fileptr == NULL)
-    {
-        printf("WARNING! Could not open file! Starting with empty list\n");
-    }
-    else{
-        
-    }
+    char *filename = "IDCodes.txt";
+    FILE *fileptr = fopen(filename, "w");
+    // FILE *fileptr = fopen("IDCodes.txt", "r");
+    // if (fileptr == NULL)
+    // {
+    //     printf("WARNING! Could not open file! Starting with empty list\n");
+    // }
+    // else
+    // {
+    // }
     do
     {
         printf("1. Enter Startcode\n");
@@ -52,6 +54,16 @@ void handleChoice(void)
                 printf("You've been exposed to corona!\n");
                 break;
             case 0:
+                fileptr = fopen(filename, "w");
+                if (!fileptr)
+                {
+                    printf("Failed to open file for writing");
+                }
+                else
+                {
+                    listWriteToFile(fileptr, list);
+                    fclose(fileptr);
+                }
                 destroyList(&list);
                 printf("Good bye! Dont get sick, stay home, clean your hands, stay safe!\n");
                 exit(1);

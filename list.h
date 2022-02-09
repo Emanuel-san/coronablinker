@@ -1,6 +1,6 @@
 #ifndef LISTH__
 #define LISTH__
-
+#include <stdio.h>
 #include "date.h"
 
 /**
@@ -51,6 +51,14 @@ idList createList(void);
  * @param idCode ID code that will be inserted into nodes ID data.
  */
 void createNewNode(idList *header, date aDate, int idCode);
+
+/**
+ * @brief
+ *
+ * @param filePtr
+ * @param list
+ */
+void listWriteToFile(FILE *filePtr, idList list);
 
 /**
  * @brief Function to print everything stored in the list.
