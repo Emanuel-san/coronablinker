@@ -119,7 +119,7 @@ int main(void)
     VERIFY(!isDateInFuture(date1), "Date is not in future");
     setDate(&date1, 28, 2, 2023);
     VERIFY(isDateInFuture(date1), "Date is in future");
-    setDate(&date1, 28, 1, 2022);
+    setDate(&date1, 28, 1, 2023);
     VERIFY(isDateInFuture(date1), "Date is in future");
     setDate(&date1, 26, 1, 2022);
     VERIFY(!isDateInFuture(date1), "Date is not in future");
