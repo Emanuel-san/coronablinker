@@ -22,7 +22,8 @@ void handleChoice(void)
     {
         list = listReadFromFile(fileptr, list);
         fclose(fileptr);
-        deleteOldIdCodes(&list, DAYS_IN_RANGE);
+        setToToday(&newDate);
+        deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
     }
     do
     {
@@ -46,7 +47,9 @@ void handleChoice(void)
                 enterStartCode(&startCode);
                 if (startCode != 0)
                 {
-                    deleteOldIdCodes(&list, DAYS_IN_RANGE);
+                    setToToday(&newDate);
+                    // printListAll(list);
+                    deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
                     // printListAll(list);
                     printf("Startcode: %d, your IDcode: %d.\n", startCode, yourIdCode);
                 }
@@ -63,7 +66,8 @@ void handleChoice(void)
                 enterIdCode(&idCode);
                 if (idCode != 0)
                 {
-                    deleteOldIdCodes(&list, DAYS_IN_RANGE);
+                    setToToday(&newDate);
+                    deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
                     if (isCodeInList(list, idCode))
                     {
                         printf("You've been exposed to corona!\n");
@@ -78,7 +82,8 @@ void handleChoice(void)
                 }
                 else
                 {
-                    deleteOldIdCodes(&list, DAYS_IN_RANGE);
+                    setToToday(&newDate);
+                    deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
                     listWriteToFile(fileptr, list);
                     fclose(fileptr);
                 }

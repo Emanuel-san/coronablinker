@@ -76,20 +76,12 @@ idList listReadFromFile(FILE *filePtr, idList list);
 void printListAll(idList header);
 
 /**
- * @brief Get the Twenty One Days Later object
- *
- * @param days
- * @return date
- */
-date getTwentyOneDaysLater(int days);
-
-/**
  * @brief Function to delete ID codes that are older then a given amount of previous days set from todays date.
  *
  * @param header ID list to remove old id codes from.
  * @param days amount of previous days.
  */
-void deleteOldIdCodes(idList *header, int days);
+void deleteOldIdCodes(idList *header, date cutoff);
 
 /**
  * @brief Takes a list of IDs and frees all of its nodes in memory until its empty.
@@ -108,8 +100,8 @@ bool listIsEmpty(idList header);
 
 /**
  * @brief Function for checking if IDcode is in list
- * @param 
- * 
+ * @param
+ *
  */
 bool isCodeInList(idList header, int idCode);
 #endif

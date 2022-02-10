@@ -79,26 +79,14 @@ void printListAll(idList header)
     printf("**********************\n");
 }
 
-date getTwentyOneDaysLater(int days)
-{
-    date today;
-    setToToday(&today);
-    return getNDaysPrevious(today, days);
-}
-
-void deleteOldIdCodes(idList *header, int days)
+void deleteOldIdCodes(idList *header, date cutoff)
 {
     idNode *currentNode = *header;
     idNode *previousNode = NULL;
-    date nDaysPrevious;
-    // date today, nDaysPrevious;
-    // setToToday(&today);
-    // nDaysPrevious = getNDaysPrevious(today, days);
-    nDaysPrevious = getTwentyOneDaysLater(days);
 
     while (currentNode != NULL)
     {
-        if (isBefore(currentNode->data.date, nDaysPrevious)) // if node date is before the given date
+        if (isBefore(currentNode->data.date, cutoff)) // if node date is before the given date
         {
             if (previousNode == NULL) // if there's no previous node, move header to the next node and free currentNode.
             {
@@ -138,14 +126,18 @@ bool listIsEmpty(idList header)
     return (header == NULL);
 }
 
-bool isCodeInList(idList header, int idCode){
+bool isCodeInList(idList header, int idCode)
+{
     idNode *currentNode = header;
-    while(currentNode!=NULL){
-        if(currentNode->data.idCode==idCode){
+    while (currentNode != NULL)
+    {
+        if (currentNode->data.idCode == idCode)
+        {
             return true;
         }
-        else{
-            currentNode=currentNode->next;
+        else
+        {
+            currentNode = currentNode->next;
         }
     }
     return false;
