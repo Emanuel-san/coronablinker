@@ -1,7 +1,7 @@
 #include "list.h"
 #include "date.h"
 #include <stdio.h>
-#include"unittest.h"
+#include "unittest.h"
 
 idList tempListTest(idList header, int nodes)
 {
@@ -49,11 +49,13 @@ int main(void)
     TEST_CASE("Testing deletingOldIdCodes");
     list = tempListTest(list, 30);
     printListAll(list);
-    printf("Deleting codes older then %d days\n", 21);
-    deleteOldIdCodes(&list, 21);
+    printf("Deleting codes older then %d days\n", 20);
+    setDate(&date1, 9, 2, 2022);
+    deleteOldIdCodes(&list, getNDaysPrevious(date1, 20));
+
     printListAll(list);
     printf("Deleting codes older then %d days\n", 30);
-    deleteOldIdCodes(&list, 30);
+    deleteOldIdCodes(&list, getNDaysPrevious(date1, 20));
     printListAll(list);
 
     return 0;
