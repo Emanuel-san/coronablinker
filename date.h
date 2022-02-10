@@ -86,4 +86,6 @@ void setToToday(date *date);
  */
 bool isDateInFuture(date aDate);
 
+bool isEqual(date first, date second);
+
 #endif
