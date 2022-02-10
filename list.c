@@ -137,3 +137,16 @@ bool listIsEmpty(idList header)
 {
     return (header == NULL);
 }
+
+bool isCodeInList(idList header, int idCode){
+    idNode *currentNode = header;
+    while(currentNode!=NULL){
+        if(currentNode->data.idCode==idCode){
+            return true;
+        }
+        else{
+            currentNode=currentNode->next;
+        }
+    }
+    return false;
+}

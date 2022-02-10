@@ -60,8 +60,15 @@ void handleChoice(void)
                 }
                 break;
             case 3:
-                printf("You've been exposed to corona!\n");
-
+                enterIdCode(&idCode);
+                if (idCode != 0)
+                {
+                    deleteOldIdCodes(&list, DAYS_IN_RANGE);
+                    if (isCodeInList(list, idCode))
+                    {
+                        printf("You've been exposed to corona!\n");
+                    }
+                }
                 break;
             case 0:
                 fileptr = fopen(filename, "w");

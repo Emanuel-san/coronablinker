@@ -42,7 +42,7 @@ void enterIdCode(int *idCode)
 {
     do
     {
-        printf("Please enter your ID code (0 to go back): ");
+        printf("Please enter ID code (0 to go back): ");
         char term;
         if (scanf("%d%c", idCode, &term) != 2 || term != '\n')
         {

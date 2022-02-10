@@ -105,4 +105,11 @@ void destroyList(idList *header);
  * @returns true if the list contains no nodes (empty list), else false.
  */
 bool listIsEmpty(idList header);
+
+/**
+ * @brief Function for checking if IDcode is in list
+ * @param 
+ * 
+ */
+bool isCodeInList(idList header, int idCode);
 #endif
