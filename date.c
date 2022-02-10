@@ -16,16 +16,17 @@ int getDaysPerMonth(date date)
     {
         return 29;
     }
-    else
+    if (date.month >= 1 && date.month <= 12)
     {
         return daysInMonth[date.month];
     }
+    return 0;
 }
 
 bool checkDate(date date)
 {
     // true if day, month and year is correct, else false
-    return (date.month <= 12 && date.month > 0 && date.day > 0 && date.day <= getDaysPerMonth(date)) && (date.month > 0 && date.month <= 12) && date.year > 2019;
+    return (date.month <= 12 && date.month > 0 && date.day > 0 && date.day <= getDaysPerMonth(date)) && date.year > 2019;
 }
 
 void setDate(date *date, int day, int month, int year)

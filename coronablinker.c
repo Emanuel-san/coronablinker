@@ -48,9 +48,9 @@ void handleChoice(void)
                 if (startCode != 0)
                 {
                     setToToday(&newDate);
-                    // printListAll(list);
+                    printListAll(list);
                     deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
-                    // printListAll(list);
+                    printListAll(list);
                     printf("Startcode: %d, your IDcode: %d.\n", startCode, yourIdCode);
                 }
                 break;
