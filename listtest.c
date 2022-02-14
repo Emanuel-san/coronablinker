@@ -19,22 +19,7 @@ idList tempListTest(idList header, int nodes)
     return header;
 }
 
-bool isDateInList(idList header, date date)
-{
-    idNode *currentNode = header;
-    while (currentNode != NULL)
-    {
-        if (isEqual(currentNode->data.date, date))
-        {
-            return true;
-        }
-        else
-        {
-            currentNode = currentNode->next;
-        }
-    }
-    return false;
-}
+
 int main(void)
 {
     idList list;

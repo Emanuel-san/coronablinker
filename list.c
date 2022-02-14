@@ -147,3 +147,20 @@ bool isCodeInList(idList header, int idCode)
     }
     return false;
 }
+
+bool isDateInList(idList header, date date)
+{
+    idNode *currentNode = header;
+    while (currentNode != NULL)
+    {
+        if (isEqual(currentNode->data.date, date))
+        {
+            return true;
+        }
+        else
+        {
+            currentNode = currentNode->next;
+        }
+    }
+    return false;
+}

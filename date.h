@@ -40,6 +40,12 @@ void setDate(date *date, int day, int month, int year);
  */
 void printFiStd(date date);
 
+/**
+ * @brief Function for comparing two dates to see if one is after the other.
+ * @param first The date we want to check if it is after in time.
+ * @param second The date we want to check if it is before the first in time.
+ * @returns true if first is after second, false otherwise.
+ */
 bool isAfter(date first, date second);
 
 /**
@@ -53,7 +59,8 @@ bool isBefore(date first, date second);
 /**
  * Get the number of days for the month of the given date
  * @param date The date to check
- * @returns an integer representing the maximun number of days in the given month
+ * @returns an integer representing the maximun number of days in the given month,
+ *          0 if the month is invalid
  */
 int getDaysPerMonth(date date);
 
@@ -80,12 +87,18 @@ void setToToday(date *date);
 
 /**
  * @brief Checks if a given date is before today.
- *
  * @param aDate Date to be checked.
  * @returns true if the date given is before todays date, else false;
  */
 bool isDateInFuture(date aDate);
 
+/**
+ * @brief Function to check if two dates are equal
+ *
+ * @param first The first date to check
+ * @param second The second date to check
+ * @return true if the dates are equal, false otherwise
+ */
 bool isEqual(date first, date second);
 
 #endif
