@@ -16,6 +16,7 @@ typedef struct idDataStruct
 /**
  * @brief Struct for storing a ID list node
  */
+
 struct idNodeStruct
 {
     idData data;
