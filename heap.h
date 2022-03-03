@@ -23,12 +23,32 @@ struct idHeapStruct
     int last;
 };
 
+/**
+ * @brief
+ */
 typedef struct idHeapStruct *idHeap;
 
+/**
+ * @brief Create a Heap object
+ */
 idHeap createHeap(void);
 
+/**
+ * @brief
+ */
 bool heapIsEmpty(idHeap heap);
 
+/**
+ * @brief
+ */
 void heapInsert(idHeap heap, idData data);
+
+/**
+ * @brief
+ *
+ * @param p
+ * @return int
+ */
+idData heapDelete(idHeap heap);
 
 #endif

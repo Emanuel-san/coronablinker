@@ -62,3 +62,58 @@ void heapInsert(idHeap heap, idData data)
         child = parent;
     }
 }
+
+idData heapDelete(idHeap heap)
+{
+    int parent, child;
+
+    idData tmp, oldestData;
+
+    if (heap == NULL)
+    {
+        printf("ERROR!\n");
+        return;
+    }
+    if (heap->last <= -1)
+    {
+        printf("Can't delete, heap is empty\n");
+        return;
+    }
+
+    /* Tas roten bort skall den ersättas med den sista noden i trädet... */
+    oldestData = heap->data[0];
+    heap->data[0] = heap->data[(heap->last)];
+    heap->last--;
+    parent = 0;
+
+    /* ...som sedan vandrar nedåt tills den funnit sin rätta plats igen */
+    while (parent * 2 + 1 < 100000)
+    {
+
+        child = 2 * parent + 1;
+
+        /* Ett potentiellt byte sker alltid med det större barnet */
+        if (isBefore(heap->data[child + 1].date, heap->data[child].date))
+        {
+            child++;
+        }
+
+        /* Låt föräldern och barnet byta plats om det behövs */
+        if (isBefore(heap->data[child].date, heap->data[parent].date))
+        {
+            tmp = heap->data[child];
+            heap->data[child] = heap->data[parent];
+            heap->data[parent] = tmp;
+        }
+        else
+        {
+            /* Nu har vi sänkt noden till rätt nivå i trädet */
+            break;
+        }
+
+        /* Gå ner en nivå och upprepa */
+        parent = child;
+    }
+
+    return oldestData;
+}

@@ -1,17 +1,17 @@
 #Variables
 
 CFLAGS = -Wall -pedantic -g
-OBJ = date.o list.o input.o coronablinker.o
-TESTOBJ = datetest.o listtest.o
-BIN = coronablinker.exe datetest.exe listtest.exe
+OBJ = date.o list.o input.o heap.o coronablinker.o
+TESTOBJ = datetest.o listtest.o heaptest.o
+BIN = coronablinker.exe datetest.exe listtest.exe heaptest.exe
 
 #Opearting system dependent variables
 ifeq ($(OS), Windows_NT)
 RM = del
-BIN = coronablinker.exe datetest.exe listtest.exe
+BIN = coronablinker.exe datetest.exe listtest.exe heaptest.exe
 else
 RM = rm
-BIN = coronablinker datetest listtest
+BIN = coronablinker datetest listtest heaptest
 endif
 #Targets
 
@@ -21,19 +21,22 @@ date.o: date.c date.h
 list.o: list.c list.h date.h
 	gcc $(CFLAGS) -c list.c -o list.o
 
+heap.o: heap.c heap.h date.h
+	gcc $(CFLAGS) -c heap.c -o heap.o
+
 input.o: input.c date.h
 	gcc $(CFLAGS) -c input.c -o input.o
 
-coronablinker.o: coronablinker.c date.h list.h input.h
+coronablinker.o: coronablinker.c date.h list.h input.h heap.h
 	gcc $(CFLAGS) -c coronablinker.c -o coronablinker.o
 
-coronablinker.exe: date.o list.o input.o coronablinker.o
+coronablinker.exe: date.o list.o input.o coronablinker.o heap.o
 	gcc $(CFLAGS) $(OBJ) -o coronablinker
 
 clean: 
 	$(RM) $(OBJ) $(TESTOBJ) $(BIN)
 
-all: coronablinker.exe listtest.exe datetest.exe
+all: coronablinker.exe listtest.exe datetest.exe heaptest.exe
 
 #Test targets
 
@@ -43,16 +46,25 @@ datetest.o: datetest.c date.h unittest.h
 listtest.o: listtest.c list.h date.h unittest.h
 	gcc $(CFLAGS) -c listtest.c -o listtest.o
 
+heaptest.o: heaptest.c heap.h date.h unittest.h
+	gcc $(CFLAGS) -c heaptest.c -o heaptest.o
+
 datetest.exe: datetest.o date.o
 	gcc $(CFLAGS) datetest.o date.o -o datetest
 
 listtest.exe: listtest.o date.o list.o
 	gcc $(CFLAGS) listtest.o date.o list.o -o listtest
 
-test: listtest.exe datetest.exe
+heaptest.exe: heaptest.o date.o heap.o
+	gcc $(CFLAGS) heaptest.o date.o heap.o -o heaptest
 
-runtest: listtest.exe datetest.exe
+
+
+test: listtest.exe datetest.exe heaptest.exe
+
+runtest: listtest.exe datetest.exe heaptest.exe
 	./listtest.exe
 	./datetest.exe
+	./heaptest.exe
 
 .DEFAULT_GOAL := all
