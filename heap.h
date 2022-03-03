@@ -17,12 +17,18 @@ typedef struct idDataStruct
 /**
  * @brief Struct for storing a ID list node
  */
-struct idNodeStruct
+struct idHeapStruct
 {
     idData data[100000];
     int last;
 };
 
-typedef struct idNodeStruct *idNode;
+typedef struct idHeapStruct *idHeap;
+
+idHeap createHeap(void);
+
+bool heapIsEmpty(idHeap heap);
+
+void heapInsert(idHeap heap, idData data);
 
 #endif

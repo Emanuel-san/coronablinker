@@ -3,11 +3,62 @@
 #include "date.h"
 #include "heap.h"
 
-idNode heapCreate(int MAX_SIZE)
+idHeap createHeap(void)
 {
-    idNode tmp = (idNode)malloc(sizeof(struct idNodeStruct));
+    idHeap tmp = (idHeap)malloc(sizeof(struct idHeapStruct));
     /* Vi utgår här från att endast positiva prioriteter > 0 förekommer */
     // memset(tmp->data, 0, MAX_SIZE * sizeof(int));
     tmp->last = -1;
     return tmp;
+}
+
+bool heapIsEmpty(idHeap heap)
+{
+    return (heap->last == -1);
+}
+
+void heapInsert(idHeap heap, idData data)
+{
+    int parent, child;
+    idData tmp;
+
+    if (heap == NULL)
+    {
+        printf("ERROR!\n");
+        return;
+    }
+
+    // TODO FIXA REALLOC
+    if (heap->last == 99999)
+    {
+        printf("GO HOME! You reached the end of the heap!\n");
+        return;
+    }
+
+    /* Börja med att lägga det nya värdet som en ny nod sist i trädet */
+    heap->data[++(heap->last)] = data;
+    child = heap->last;
+
+    /* Det nya värdet kan vandra hela vägen upp till roten */
+    while (child != 0)
+    {
+
+        parent = (child - 1) / 2; // avrundar nedåt med heltalsdivision
+
+        /* Låt föräldern och barnet byta plats om det behövs */
+        if (isBefore(heap->data[child].date, heap->data[parent].date))
+        {
+            tmp = heap->data[child];
+            heap->data[child] = heap->data[parent];
+            heap->data[parent] = tmp;
+        }
+        else
+        {
+            /* Nu har vi lyft noden till rätt nivå i trädet */
+            break;
+        }
+
+        /* Gå upp en nivå och upprepa */
+        child = parent;
+    }
 }
