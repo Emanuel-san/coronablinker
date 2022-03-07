@@ -26,8 +26,8 @@ int main(void)
     printf("\n%d", heap->data[0].idCode);
     printf("\n%d", heap->last);
 
-    TEST_CASE("Testing heapDelete");
-    outData = heapDelete(heap);
+    TEST_CASE("Testing heapPop");
+    outData = heapPop(heap);
     VERIFY(heapIsEmpty(heap), "Heap is empty");
     printFiStd(outData.date);
     printf("\n%d", outData.idCode);

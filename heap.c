@@ -63,7 +63,7 @@ void heapInsert(idHeap heap, idData data)
     }
 }
 
-idData heapDelete(idHeap heap)
+idData heapPop(idHeap heap)
 {
     int parent, child;
 
