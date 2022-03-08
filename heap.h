@@ -55,4 +55,18 @@ void heapInsert(idHeap heap, idData data);
  */
 idData heapPop(idHeap heap);
 
+/**
+ * @brief
+ *
+ */
+void heapPrint(idHeap heap);
+
+/**
+ * @brief
+ *
+ * @param heap
+ * @return idHeap
+ */
+idHeap heapSort(idHeap heap);
+
 #endif

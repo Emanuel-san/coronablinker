@@ -87,19 +87,19 @@ idData heapPop(idHeap heap)
     parent = 0;
 
     /* ...som sedan vandrar nedåt tills den funnit sin rätta plats igen */
-    while (parent * 2 + 1 < 100000)
+    while (parent * 2 + 1 <= heap->last)
     {
 
         child = 2 * parent + 1;
 
         /* Ett potentiellt byte sker alltid med det större barnet */
-        if (isBefore(heap->data[child + 1].date, heap->data[child].date))
+        if (isBefore(heap->data[child + 1].date, heap->data[child].date) && heap->data[child + 1].date.day != 0)
         {
             child++;
         }
 
         /* Låt föräldern och barnet byta plats om det behövs */
-        if (isBefore(heap->data[child].date, heap->data[parent].date))
+        if (isBefore(heap->data[child].date, heap->data[parent].date) && heap->data[child].date.day != 0)
         {
             tmp = heap->data[child];
             heap->data[child] = heap->data[parent];
@@ -116,4 +116,33 @@ idData heapPop(idHeap heap)
     }
 
     return oldestData;
+}
+
+idHeap heapSort(idHeap heap)
+{
+
+    if (heap->last <= -1)
+    {
+        printf("Can't sort, heap is empty\n");
+        return;
+    }
+
+    idHeap sortedHeap = createHeap();
+
+    while (heap->last > -1)
+    {
+        heapInsert(sortedHeap, heapPop(heap));
+    }
+
+    free(heap);
+    return sortedHeap;
+}
+
+void heapPrint(idHeap heap)
+{
+
+    for (int i = 0; i <= heap->last; i++)
+    {
+        printf("ID:%d DATE:%d.%d.%d\n", heap->data[i].idCode, heap->data[i].date.day, heap->data[i].date.month, heap->data[i].date.year);
+    }
 }
