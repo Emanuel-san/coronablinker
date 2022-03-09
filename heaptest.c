@@ -51,6 +51,10 @@ int main(void)
     printf("\n%d", outData.idCode);
     printf("\n%d", heap->last);
 
+    TEST_CASE("Testing heapPop and heapSort on empty heap");
+    heapPop(heap);
+    heap = heapSort(heap);
+
     TEST_CASE("Testing sortHeap");
     setDate(&aDate, 12, 2, 2022);
     inData.date = aDate;
@@ -93,5 +97,12 @@ int main(void)
     printf("\n");
     heap = heapSort(heap);
     VERIFY(heapCheckTestSort(heap), "Heap is sorted");
+    heapPrint(heap);
+
+    TEST_CASE("Testing deleteOldIdCode");
+    setDate(&aDate, 31, 12, 2021);
+    deleteOldIdData(heap, aDate);
+    VERIFY(!isBefore(heap->data[0].date, aDate), "All dates older then 31.12.2021 is deleted");
+    heap = heapSort(heap);
     heapPrint(heap);
 }

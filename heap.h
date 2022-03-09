@@ -69,4 +69,11 @@ void heapPrint(idHeap heap);
  */
 idHeap heapSort(idHeap heap);
 
+/**
+ * @brief 
+ * 
+ * @param heap 
+ */
+void deleteOldIdData(idHeap heap, date cutoff);
+
 #endif
