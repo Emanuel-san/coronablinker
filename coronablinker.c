@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "input.h"
-#include "list.h"
+//#include "list.h"
+#include "heap.h"
 
 #define DAYS_IN_RANGE 21
 
@@ -11,7 +12,8 @@ void handleChoice(void)
     int idCode = 0, startCode = 0;
     int yourIdCode = 9999999;
     date newDate;
-    idList list = createList();
+    // idList list = createList();
+    idHeap heap = createHeap();
     char *filename = "IDCodes.txt";
     FILE *fileptr = fopen(filename, "r");
     if (fileptr == NULL)
@@ -20,10 +22,12 @@ void handleChoice(void)
     }
     else
     {
-        list = listReadFromFile(fileptr, list);
+        // list = listReadFromFile(fileptr, list);
+        heapReadFromFile(fileptr, heap);
         fclose(fileptr);
         setToToday(&newDate);
-        deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
+        // deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
+        deleteOldIdData(heap, getNDaysPrevious(newDate, DAYS_IN_RANGE));
     }
     do
     {
@@ -49,31 +53,38 @@ void handleChoice(void)
                 {
                     setToToday(&newDate);
                     // printListAll(list);
-                    deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
+                    // deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
+                    deleteOldIdData(heap, getNDaysPrevious(newDate, DAYS_IN_RANGE));
                     // printListAll(list);
                     printf("Startcode: %d, your IDcode: %d.\n", startCode, yourIdCode);
                 }
                 break;
+
             case 2:
                 enterIdCode(&idCode);
                 if (idCode != 0)
                 {
                     newDate = enterDate();
-                    createNewNode(&list, newDate, idCode);
+                    // createNewNode(&list, newDate, idCode);
+                    heapInsert(heap, createIdDataElement(newDate, idCode));
                 }
                 break;
+
             case 3:
                 enterIdCode(&idCode);
                 if (idCode != 0)
                 {
                     setToToday(&newDate);
-                    deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
-                    if (isCodeInList(list, idCode))
+                    // deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
+                    deleteOldIdData(heap, getNDaysPrevious(newDate, DAYS_IN_RANGE));
+                    // if (isCodeInList(list, idCode))
+                    if (isIdCodeinHeap(heap, idCode))
                     {
                         printf("You've been exposed to corona!\n");
                     }
                 }
                 break;
+
             case 0:
                 fileptr = fopen(filename, "w");
                 if (!fileptr)
@@ -83,13 +94,18 @@ void handleChoice(void)
                 else
                 {
                     setToToday(&newDate);
-                    deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
-                    listWriteToFile(fileptr, list);
+                    // deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
+                    deleteOldIdData(heap, getNDaysPrevious(newDate, DAYS_IN_RANGE));
+                    // listWriteToFile(fileptr, list);
+                    heap = heapSort(heap);
+                    heapWriteToFile(fileptr, heap);
                     fclose(fileptr);
                 }
-                destroyList(&list);
+                // destroyList(&list);
+                heapDestroy(heap);
                 printf("Good bye! Dont get sick, stay home, clean your hands, stay safe!\n");
                 exit(1);
+
             default:
                 printf("Invalid choice!\n");
             }

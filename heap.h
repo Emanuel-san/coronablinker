@@ -95,9 +95,18 @@ void heapDestroy(idHeap heap);
 void heapWriteToFile(FILE *filePtr, idHeap heap);
 
 /**
- * @brief 
- * 
+ * @brief
+ *
  */
 void heapReadFromFile(FILE *filePtr, idHeap heap);
+
+/**
+ * @brief Create a Id Data Element object
+ *
+ * @param newDate
+ * @param newIdCode
+ * @return idData
+ */
+idData createIdDataElement(date newDate, int newIdCode);
 
 #endif

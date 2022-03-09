@@ -8,6 +8,11 @@ idHeap createHeap(void)
     idHeap tmp = (idHeap)malloc(sizeof(struct idHeapStruct));
     /* Vi utgår här från att endast positiva prioriteter > 0 förekommer */
     // memset(tmp->data, 0, MAX_SIZE * sizeof(int));
+    if (tmp == NULL)
+    {
+        printf("Memory allocation failed. Exiting");
+        exit(0);
+    }
     tmp->last = -1;
     return tmp;
 }
@@ -31,7 +36,7 @@ void heapInsert(idHeap heap, idData data)
     // TODO FIXA REALLOC
     if (heap->last == 99999)
     {
-        printf("GO HOME! You reached the end of the heap!\n");
+        // printf("GO HOME! You reached the end of the heap!\n");
         return;
     }
 
@@ -76,7 +81,7 @@ idData heapPop(idHeap heap)
     }
     if (heap->last <= -1)
     {
-        printf("Can't delete, heap is empty\n");
+        // printf("Can't delete, heap is empty\n");
         return oldestData;
     }
 
@@ -123,7 +128,7 @@ idHeap heapSort(idHeap heap)
 
     if (heap->last <= -1)
     {
-        printf("Can't sort, heap is empty\n");
+        // printf("Can't sort, heap is empty\n");
         return heap;
     }
 
@@ -143,7 +148,7 @@ void heapPrint(idHeap heap)
 
     for (int i = 0; i <= heap->last; i++)
     {
-        printf("ID:%d DATE:%d.%d.%d\n", heap->data[i].idCode, heap->data[i].date.day, heap->data[i].date.month, heap->data[i].date.year);
+        printf("id: %d date: %d.%d.%d\n", heap->data[i].idCode, heap->data[i].date.day, heap->data[i].date.month, heap->data[i].date.year);
     }
 }
 
@@ -151,7 +156,7 @@ void deleteOldIdData(idHeap heap, date cutoff)
 {
     if (heap->last <= -1)
     {
-        printf("Can't delete, heap is empty\n");
+        // printf("Can't delete, heap is empty\n");
         return;
     }
     while (isBefore(heap->data[0].date, cutoff) && heap->last > -1)
@@ -184,6 +189,7 @@ void heapDestroy(idHeap heap)
 
 void heapWriteToFile(FILE *filePtr, idHeap heap)
 {
+
     for (int i = 0; i <= heap->last; i++)
     {
         fprintf(filePtr, "id: %d date: %d.%d.%d\n", heap->data[i].idCode, heap->data[i].date.day, heap->data[i].date.month, heap->data[i].date.year);
@@ -197,4 +203,12 @@ void heapReadFromFile(FILE *filePtr, idHeap heap)
     {
         heapInsert(heap, data);
     }
+}
+
+idData createIdDataElement(date newDate, int newIdCode)
+{
+    idData newIdData;
+    newIdData.date = newDate;
+    newIdData.idCode = newIdCode;
+    return newIdData;
 }
