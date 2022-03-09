@@ -186,6 +186,15 @@ void heapWriteToFile(FILE *filePtr, idHeap heap)
 {
     for (int i = 0; i <= heap->last; i++)
     {
-        fprintf(filePtr, "ID:%d DATE:%d.%d.%d\n", heap->data[i].idCode, heap->data[i].date.day, heap->data[i].date.month, heap->data[i].date.year);
+        fprintf(filePtr, "id: %d date: %d.%d.%d\n", heap->data[i].idCode, heap->data[i].date.day, heap->data[i].date.month, heap->data[i].date.year);
+    }
+}
+
+void heapReadFromFile(FILE *filePtr, idHeap heap)
+{
+    idData data;
+    while (fscanf(filePtr, "id: %d date: %d.%d.%d\n", &data.idCode, &data.date.day, &data.date.month, &data.date.year) == 4)
+    {
+        heapInsert(heap, data);
     }
 }

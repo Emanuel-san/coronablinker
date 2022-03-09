@@ -17,6 +17,51 @@ bool heapCheckTestSort(idHeap heap)
     return sortCheck;
 }
 
+void createTestHeap(idHeap heap)
+{
+    date aDate;
+    idData inData;
+    inData.idCode = 123456;
+
+    setDate(&aDate, 12, 2, 2022);
+    inData.date = aDate;
+    heapInsert(heap, inData);
+    setDate(&aDate, 5, 1, 2022);
+    inData.date = aDate;
+    heapInsert(heap, inData);
+    setDate(&aDate, 28, 12, 2021);
+    inData.date = aDate;
+    heapInsert(heap, inData);
+    setDate(&aDate, 20, 2, 2022);
+    inData.date = aDate;
+    heapInsert(heap, inData);
+    setDate(&aDate, 20, 3, 2022);
+    inData.date = aDate;
+    heapInsert(heap, inData);
+    setDate(&aDate, 10, 3, 2022);
+    inData.date = aDate;
+    heapInsert(heap, inData);
+    setDate(&aDate, 4, 11, 2021);
+    inData.date = aDate;
+    heapInsert(heap, inData);
+    setDate(&aDate, 21, 10, 2021);
+    inData.date = aDate;
+    heapInsert(heap, inData);
+    setDate(&aDate, 5, 5, 2022);
+    inData.idCode = 647565;
+    inData.date = aDate;
+    heapInsert(heap, inData);
+    setDate(&aDate, 7, 8, 2019);
+    inData.date = aDate;
+    heapInsert(heap, inData);
+    setDate(&aDate, 20, 9, 2023);
+    inData.date = aDate;
+    heapInsert(heap, inData);
+    setDate(&aDate, 10, 10, 2020);
+    inData.date = aDate;
+    heapInsert(heap, inData);
+}
+
 int main(void)
 {
     idHeap heap = NULL;
@@ -56,43 +101,7 @@ int main(void)
     heap = heapSort(heap);
 
     TEST_CASE("Testing sortHeap");
-    setDate(&aDate, 12, 2, 2022);
-    inData.date = aDate;
-    heapInsert(heap, inData);
-    setDate(&aDate, 5, 1, 2022);
-    inData.date = aDate;
-    heapInsert(heap, inData);
-    setDate(&aDate, 28, 12, 2021);
-    inData.date = aDate;
-    heapInsert(heap, inData);
-    setDate(&aDate, 20, 2, 2022);
-    inData.date = aDate;
-    heapInsert(heap, inData);
-    setDate(&aDate, 20, 3, 2022);
-    inData.date = aDate;
-    heapInsert(heap, inData);
-    setDate(&aDate, 10, 3, 2022);
-    inData.date = aDate;
-    heapInsert(heap, inData);
-    setDate(&aDate, 4, 11, 2021);
-    inData.date = aDate;
-    heapInsert(heap, inData);
-    setDate(&aDate, 21, 10, 2021);
-    inData.date = aDate;
-    heapInsert(heap, inData);
-    setDate(&aDate, 5, 5, 2022);
-    inData.idCode = 647565;
-    inData.date = aDate;
-    heapInsert(heap, inData);
-    setDate(&aDate, 7, 8, 2019);
-    inData.date = aDate;
-    heapInsert(heap, inData);
-    setDate(&aDate, 20, 9, 2023);
-    inData.date = aDate;
-    heapInsert(heap, inData);
-    setDate(&aDate, 10, 10, 2020);
-    inData.date = aDate;
-    heapInsert(heap, inData);
+    createTestHeap(heap);
     VERIFY(!heapCheckTestSort(heap), "Heap is not sorted");
     heapPrint(heap);
     printf("\n");
@@ -110,9 +119,4 @@ int main(void)
     TEST_CASE("testing isIdCodeInHeap");
     VERIFY(isIdCodeinHeap(heap, 647565), "Id code is in heap");
     VERIFY(!isIdCodeinHeap(heap, 999999), "Id code is not in heap");
-
-    char *filename = "IDCodes.txt";
-    FILE *fileptr = fopen(filename, "w");
-    heapWriteToFile(fileptr, heap);
-    fclose(fileptr);
 }

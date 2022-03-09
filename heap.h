@@ -94,4 +94,10 @@ void heapDestroy(idHeap heap);
  */
 void heapWriteToFile(FILE *filePtr, idHeap heap);
 
+/**
+ * @brief 
+ * 
+ */
+void heapReadFromFile(FILE *filePtr, idHeap heap);
+
 #endif
