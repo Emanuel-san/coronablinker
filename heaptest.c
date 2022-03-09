@@ -19,7 +19,7 @@ bool heapCheckTestSort(idHeap heap)
 
 int main(void)
 {
-    idHeap heap;
+    idHeap heap = NULL;
     idData inData, outData;
     date aDate;
     setToToday(&aDate);
@@ -81,6 +81,7 @@ int main(void)
     inData.date = aDate;
     heapInsert(heap, inData);
     setDate(&aDate, 5, 5, 2022);
+    inData.idCode = 647565;
     inData.date = aDate;
     heapInsert(heap, inData);
     setDate(&aDate, 7, 8, 2019);
@@ -105,4 +106,13 @@ int main(void)
     VERIFY(!isBefore(heap->data[0].date, aDate), "All dates older then 31.12.2021 is deleted");
     heap = heapSort(heap);
     heapPrint(heap);
+
+    TEST_CASE("testing isIdCodeInHeap");
+    VERIFY(isIdCodeinHeap(heap, 647565), "Id code is in heap");
+    VERIFY(!isIdCodeinHeap(heap, 999999), "Id code is not in heap");
+
+    char *filename = "IDCodes.txt";
+    FILE *fileptr = fopen(filename, "w");
+    heapWriteToFile(fileptr, heap);
+    fclose(fileptr);
 }

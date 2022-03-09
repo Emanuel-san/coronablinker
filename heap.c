@@ -159,3 +159,33 @@ void deleteOldIdData(idHeap heap, date cutoff)
         heapPop(heap);
     }
 }
+
+bool isIdCodeinHeap(idHeap heap, int code)
+{
+    for (int i = 0; i <= heap->last; i++)
+    {
+        if (heap->data[i].idCode == code)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void heapDestroy(idHeap heap)
+{
+    if (heap == NULL)
+    {
+        printf("ERROR!\n");
+        return;
+    }
+    free(heap);
+}
+
+void heapWriteToFile(FILE *filePtr, idHeap heap)
+{
+    for (int i = 0; i <= heap->last; i++)
+    {
+        fprintf(filePtr, "ID:%d DATE:%d.%d.%d\n", heap->data[i].idCode, heap->data[i].date.day, heap->data[i].date.month, heap->data[i].date.year);
+    }
+}

@@ -70,10 +70,28 @@ void heapPrint(idHeap heap);
 idHeap heapSort(idHeap heap);
 
 /**
- * @brief 
- * 
- * @param heap 
+ * @brief
+ *
+ * @param heap
  */
 void deleteOldIdData(idHeap heap, date cutoff);
+
+/**
+ * @brief
+ *
+ */
+bool isIdCodeinHeap(idHeap heap, int code);
+
+/**
+ * @brief
+ *
+ */
+void heapDestroy(idHeap heap);
+
+/**
+ * @brief
+ *
+ */
+void heapWriteToFile(FILE *filePtr, idHeap heap);
 
 #endif
