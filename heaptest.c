@@ -75,6 +75,7 @@ int main(int argc, char *argv[])
     inData.date = aDate;
     inData.idCode = 123456;
     char *filename = "IDCodesbinary.txt";
+    int yourIdCode = 9999999;
 
     // TEST_CASE("Testing createHeap");
     heap = createHeap();
@@ -140,49 +141,105 @@ int main(int argc, char *argv[])
         fclose(fileptr);
         heapPrint(heap2);
     }
+    else
+    {
+        // char *command_strings[] = {"add", "sick", "check", "debug", "help"};
+        // printf("%d", atoi(argv[2]));
+        if (!strcmp(argv[1], "add")) // strcmp returns 0 if strings are equal
+        {
+            if (argc != 4)
+            {
+                printf("Wrong amount of arguments for 'sick' command, type 'help' for available commands");
+            }
+            else if (!validIdcode(atoi(argv[2])) || strlen(argv[2]) > 7)
+            {
+                printf("Invalid ID code, has to be exactly 7 numbers");
+            }
+            else
+            {
+                int day, month, year;
+                char *delimiters = "./-";
+                date newDate;
+                day = atoi(strtok(argv[3], delimiters));
+                month = atoi(strtok(NULL, delimiters));
+                year = atoi(strtok(NULL, delimiters));
+                setDate(&newDate, day, month, year);
+                if (!checkDate(newDate) || isDateInFuture(newDate))
+                {
+                    printf("Invalid date!");
+                }
+                else
+                {
+                    FILE *fileptr = fopen(filename, "rb");
+                    heapReadFromFile(fileptr, heap2);
+                    fclose(fileptr);
 
-    // char *command_strings[] = {"add", "sick", "check", "debug", "help"};
-    // printf("%d", atoi(argv[2]));
-    if (!strcmp(argv[1], "add")) // strcmp returns 0 if strings are equal
-    {
-    }
-    else if (!strcmp(argv[1], "sick"))
-    {
-    }
-    else if (!strcmp(argv[1], "check"))
-    {
-        if (argc != 3)
-        {
-            printf("Wrong amount of arguments for 'check' command, type 'help' for available commands");
+                    heapInsert(heap2, createIdDataElement(newDate, atoi(argv[2])));
+                    setDate(&aDate, 31, 12, 2021);
+                    deleteOldIdData(heap2, aDate);
+                    fileptr = fopen(filename, "wb");
+                    heapWriteToFile(fileptr, heap2);
+                    fclose(fileptr);
+                    printf("Registered interaction with device %d on ", atoi(argv[2]));
+                    printFiStd(newDate);
+                }
+            }
         }
-        else if (!validIdcode(atoi(argv[2])))
+        else if (!strcmp(argv[1], "sick"))
         {
-            printf("Invalid ID code, has to be exactly 7 numbers");
+            if (argc != 3)
+            {
+                printf("Wrong amount of arguments for 'sick' command, type 'help' for available commands");
+            }
+            else if (!validStartcode(atoi(argv[2])) || strlen(argv[2]) > 6)
+            {
+                printf("Invalid start code, has to be exactly 6 numbers");
+            }
+            else
+            {
+                printf("Reporting own device %d to server with start code %d", yourIdCode, atoi(argv[2]));
+            }
         }
-        else
+        else if (!strcmp(argv[1], "check"))
+        {
+            if (argc != 3)
+            {
+                printf("Wrong amount of arguments for 'check' command, type 'help' for available commands");
+            }
+            else if (!validIdcode(atoi(argv[2])) || strlen(argv[2]) > 7)
+            {
+                printf("Invalid ID code, has to be exactly 7 numbers");
+            }
+            else
+            {
+                FILE *fileptr = fopen(filename, "rb");
+                heapReadFromFile(fileptr, heap2);
+                fclose(fileptr);
+                setDate(&aDate, 31, 12, 2021);
+                deleteOldIdData(heap2, aDate);
+                // heapPrint(heap2);
+                if (isIdCodeinHeap(heap2, atoi(argv[2])))
+                {
+                    printf("You've been exposed to corona!");
+                }
+            }
+        }
+        else if (!strcmp(argv[1], "debug"))
         {
             FILE *fileptr = fopen(filename, "rb");
             heapReadFromFile(fileptr, heap2);
             fclose(fileptr);
             setDate(&aDate, 31, 12, 2021);
-            deleteOldIdData(heap, aDate);
-            // heapPrint(heap2);
-            if (isIdCodeinHeap(heap2, atoi(argv[2])))
-            {
-                printf("You've been exposed to corona!");
-            }
+            deleteOldIdData(heap2, aDate);
+            printf("Stored data\n");
+            heapPrint(heap2);
         }
-    }
-    else if (!strcmp(argv[1], "debug"))
-    {
-        printf("Stored data\n");
-        heapPrint(heap2);
-    }
-    else if (!strcmp(argv[1], "help"))
-    {
-    }
-    else
-    {
-        printf("Unkown argument, type 'help' for available commands");
+        else if (!strcmp(argv[1], "help"))
+        {
+        }
+        else
+        {
+            printf("Unkown argument, type 'help' for available commands");
+        }
     }
 }

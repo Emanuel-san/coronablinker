@@ -52,12 +52,12 @@ void handleChoice(void)
                 enterStartCode(&startCode);
                 if (startCode != 0)
                 {
-                    setToToday(&newDate);
+                    //setToToday(&newDate);
                     // printListAll(list);
                     // deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
-                    deleteOldIdData(heap, getNDaysPrevious(newDate, DAYS_IN_RANGE));
+                    //deleteOldIdData(heap, getNDaysPrevious(newDate, DAYS_IN_RANGE));
                     // printListAll(list);
-                    printf("Startcode: %d, your IDcode: %d.\n", startCode, yourIdCode);
+                    printf("Reporting own device %d to server with start code %d.\n", yourIdCode, startCode);
                 }
                 break;
 
