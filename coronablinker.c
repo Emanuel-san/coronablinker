@@ -15,7 +15,7 @@ void handleChoice(void)
     // idList list = createList();
     idHeap heap = createHeap();
     char *filename = "IDCodes.txt";
-    FILE *fileptr = fopen(filename, "r");
+    FILE *fileptr = fopen(filename, "rb");
     if (fileptr == NULL)
     {
         printf("WARNING! Could not open file! Starting with empty list\n");
@@ -28,6 +28,7 @@ void handleChoice(void)
         setToToday(&newDate);
         // deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
         deleteOldIdData(heap, getNDaysPrevious(newDate, DAYS_IN_RANGE));
+        //heapPrint(heap);
     }
     do
     {
@@ -86,7 +87,7 @@ void handleChoice(void)
                 break;
 
             case 0:
-                fileptr = fopen(filename, "w");
+                fileptr = fopen(filename, "wb");
                 if (!fileptr)
                 {
                     printf("Failed to open file for writing");

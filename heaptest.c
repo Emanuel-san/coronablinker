@@ -64,7 +64,7 @@ void createTestHeap(idHeap heap)
 
 int main(void)
 {
-    idHeap heap = NULL;
+    idHeap heap = NULL, heap2;
     idData inData, outData;
     date aDate;
     setToToday(&aDate);
@@ -73,6 +73,7 @@ int main(void)
 
     TEST_CASE("Testing createHeap");
     heap = createHeap();
+    heap2 = createHeap();
 
     TEST_CASE("Testing heapIsEmpty");
     VERIFY(heapIsEmpty(heap), "Heap is empty");
@@ -119,4 +120,16 @@ int main(void)
     TEST_CASE("testing isIdCodeInHeap");
     VERIFY(isIdCodeinHeap(heap, 647565), "Id code is in heap");
     VERIFY(!isIdCodeinHeap(heap, 999999), "Id code is not in heap");
+
+    TEST_CASE("Testing binary write");
+    char *filename = "IDCodesbinary.txt";
+    FILE *fileptr = fopen(filename, "wb");
+    heapWriteToFile(fileptr, heap);
+    fclose(fileptr);
+
+    TEST_CASE("Testing binary read");
+    fileptr = fopen(filename, "rb");
+    heapReadFromFile(fileptr, heap2);
+    fclose(fileptr);
+    heapPrint(heap2);
 }

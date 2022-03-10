@@ -190,16 +190,22 @@ void heapDestroy(idHeap heap)
 void heapWriteToFile(FILE *filePtr, idHeap heap)
 {
 
-    for (int i = 0; i <= heap->last; i++)
+    /*for (int i = 0; i <= heap->last; i++)
     {
         fprintf(filePtr, "id: %d date: %d.%d.%d\n", heap->data[i].idCode, heap->data[i].date.day, heap->data[i].date.month, heap->data[i].date.year);
-    }
+    }*/
+    fwrite(heap->data, sizeof(idData), heap->last + 1, filePtr);
 }
 
 void heapReadFromFile(FILE *filePtr, idHeap heap)
 {
+    // idData data;
+    // while (fscanf(filePtr, "id: %d date: %d.%d.%d\n", &data.idCode, &data.date.day, &data.date.month, &data.date.year) == 4)
+    // {
+    //     heapInsert(heap, data);
+    // }
     idData data;
-    while (fscanf(filePtr, "id: %d date: %d.%d.%d\n", &data.idCode, &data.date.day, &data.date.month, &data.date.year) == 4)
+    while (fread(&data, sizeof(idData), 1, filePtr) == 1)
     {
         heapInsert(heap, data);
     }
