@@ -86,7 +86,7 @@ bool isIdCodeinHeap(idHeap heap, int code);
  * @brief
  *
  */
-void heapDestroy(idHeap heap);
+idHeap heapDestroy(idHeap heap);
 
 /**
  * @brief

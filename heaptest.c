@@ -130,16 +130,20 @@ int main(int argc, char *argv[])
         VERIFY(isIdCodeinHeap(heap, 6475656), "Id code is in heap");
         VERIFY(!isIdCodeinHeap(heap, 9999999), "Id code is not in heap");
 
-        TEST_CASE("Testing binary write");
+        TEST_CASE("Testing binary write and read from files");
         FILE *fileptr = fopen(filename, "wb");
         heapWriteToFile(fileptr, heap);
         fclose(fileptr);
 
-        TEST_CASE("Testing binary read");
         fileptr = fopen(filename, "rb");
         heapReadFromFile(fileptr, heap2);
         fclose(fileptr);
-        heapPrint(heap2);
+        VERIFY(heap2->last == heap->last, "Both heaps have the same number of data elements after write and read");
+
+        TEST_CASE("Testing heapDestroy");
+        VERIFY(heap2 != NULL, "Heap is not null");
+        heap2 = heapDestroy(heap2);
+        VERIFY(heap2 == NULL, "Heap is null");
     }
     else
     {
