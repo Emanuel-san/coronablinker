@@ -6,7 +6,6 @@
 idHeap createHeap(void)
 {
     idHeap tmp = (idHeap)malloc(sizeof(struct idHeapStruct));
-    /* Vi utgår här från att endast positiva prioriteter > 0 förekommer */
     // memset(tmp->data, 0, MAX_SIZE * sizeof(int));
     if (tmp == NULL)
     {
@@ -40,17 +39,17 @@ void heapInsert(idHeap heap, idData data)
         return;
     }
 
-    /* Börja med att lägga det nya värdet som en ny nod sist i trädet */
+    // Set the new data furthest down in the "tree" (last + 1) and set child as that node
     heap->data[++(heap->last)] = data;
     child = heap->last;
 
-    /* Det nya värdet kan vandra hela vägen upp till roten */
+    // Loop while the new node still havent wandered up to the root.
     while (child != 0)
     {
+        // Find the parent node of the child node
+        parent = (child - 1) / 2;
 
-        parent = (child - 1) / 2; // avrundar nedåt med heltalsdivision
-
-        /* Låt föräldern och barnet byta plats om det behövs */
+        // Child and parent will swap places if the childs date in data is before the date of the parent.
         if (isBefore(heap->data[child].date, heap->data[parent].date))
         {
             tmp = heap->data[child];
@@ -59,11 +58,11 @@ void heapInsert(idHeap heap, idData data)
         }
         else
         {
-            /* Nu har vi lyft noden till rätt nivå i trädet */
+            // Break out of the loop is the child is now in the correct spot in the heap
             break;
         }
 
-        /* Gå upp en nivå och upprepa */
+        // Move the child up one level and check again.
         child = parent;
     }
 }
@@ -76,34 +75,35 @@ idData heapPop(idHeap heap)
 
     if (heap == NULL)
     {
-        printf("ERROR!\n");
-        return oldestData;
+        printf("Heap has no allocated memory, exiting.");
+        exit(EXIT_FAILURE);
     }
     if (heap->last <= -1)
     {
-        // printf("Can't delete, heap is empty\n");
-        return oldestData;
+        printf("Exited heapPop with an empty heap, error was not caught earlier, exiting");
+        exit(EXIT_FAILURE);
     }
 
-    /* Tas roten bort skall den ersättas med den sista noden i trädet... */
-    oldestData = heap->data[0];
-    heap->data[0] = heap->data[(heap->last)];
+    /* When root is removed it has to replaced by the last node in the heap "tree" */
+    oldestData = heap->data[0];               // data we return from function
+    heap->data[0] = heap->data[(heap->last)]; // move last node to root
     heap->last--;
     parent = 0;
 
-    /* ...som sedan vandrar nedåt tills den funnit sin rätta plats igen */
+    // As we move the node down the tree we make sure we done go past the current size(heap->last) of the heap.
+    // If the parent is bigger or equal to the size then we are at the bottom and should not move further
     while (parent * 2 + 1 <= heap->last)
     {
 
         child = 2 * parent + 1;
 
-        /* Ett potentiellt byte sker alltid med det större barnet */
+        // Compare the tweo child nodes and choose the oldest one to ensure we always change with the oldest date if needed
         if (isBefore(heap->data[child + 1].date, heap->data[child].date))
         {
             child++;
         }
 
-        /* Låt föräldern och barnet byta plats om det behövs */
+        // If the child is older then the parent then we change
         if (isBefore(heap->data[child].date, heap->data[parent].date))
         {
             tmp = heap->data[child];
@@ -177,14 +177,16 @@ bool isIdCodeinHeap(idHeap heap, int code)
     return false;
 }
 
-void heapDestroy(idHeap heap)
+idHeap heapDestroy(idHeap heap)
 {
     if (heap == NULL)
     {
         printf("ERROR!\n");
-        return;
+        return heap;
     }
     free(heap);
+    heap = NULL;
+    return heap;
 }
 
 void heapWriteToFile(FILE *filePtr, idHeap heap)
