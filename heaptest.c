@@ -106,10 +106,6 @@ int main(int argc, char *argv[])
         printf("\n%d", outData.idCode);
         printf("\n%d", heap->last);
 
-        TEST_CASE("Testing heapPop and heapSort on empty heap");
-        heapPop(heap);
-        heap = heapSort(heap);
-
         TEST_CASE("Testing sortHeap");
         createTestHeap(heap);
         VERIFY(!heapCheckTestSort(heap), "Heap is not sorted");

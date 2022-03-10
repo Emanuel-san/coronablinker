@@ -5,7 +5,7 @@
 
 idHeap createHeap(void)
 {
-    idHeap tmp = (idHeap)malloc(sizeof(struct idHeapStruct));
+    idHeap tmp = malloc(sizeof(struct idHeapStruct));
     // memset(tmp->data, 0, MAX_SIZE * sizeof(int));
     if (tmp == NULL)
     {

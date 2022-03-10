@@ -28,7 +28,7 @@ void handleChoice(void)
         setToToday(&newDate);
         // deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
         deleteOldIdData(heap, getNDaysPrevious(newDate, DAYS_IN_RANGE));
-        //heapPrint(heap);
+        // heapPrint(heap);
     }
     do
     {
@@ -52,11 +52,11 @@ void handleChoice(void)
                 enterStartCode(&startCode);
                 if (startCode != 0)
                 {
-                    //setToToday(&newDate);
-                    // printListAll(list);
-                    // deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
-                    //deleteOldIdData(heap, getNDaysPrevious(newDate, DAYS_IN_RANGE));
-                    // printListAll(list);
+                    // setToToday(&newDate);
+                    //  printListAll(list);
+                    //  deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
+                    // deleteOldIdData(heap, getNDaysPrevious(newDate, DAYS_IN_RANGE));
+                    //  printListAll(list);
                     printf("Reporting own device %d to server with start code %d.\n", yourIdCode, startCode);
                 }
                 break;
