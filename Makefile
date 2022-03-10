@@ -46,7 +46,7 @@ datetest.o: datetest.c date.h unittest.h
 listtest.o: listtest.c list.h date.h unittest.h
 	gcc $(CFLAGS) -c listtest.c -o listtest.o
 
-heaptest.o: heaptest.c heap.h date.h unittest.h
+heaptest.o: heaptest.c heap.h date.h unittest.h input.h
 	gcc $(CFLAGS) -c heaptest.c -o heaptest.o
 
 datetest.exe: datetest.o date.o
@@ -55,8 +55,8 @@ datetest.exe: datetest.o date.o
 listtest.exe: listtest.o date.o list.o
 	gcc $(CFLAGS) listtest.o date.o list.o -o listtest
 
-heaptest.exe: heaptest.o date.o heap.o
-	gcc $(CFLAGS) heaptest.o date.o heap.o -o heaptest
+heaptest.exe: heaptest.o date.o heap.o input.o
+	gcc $(CFLAGS) heaptest.o date.o heap.o input.o -o heaptest
 
 
 
