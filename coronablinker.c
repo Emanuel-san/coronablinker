@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "input.h"
 //#include "list.h"
 #include "heap.h"
@@ -114,10 +115,127 @@ void handleChoice(void)
     } while (1);
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
+    if (argc == 1)
+    {
+        handleChoice();
+    }
+    else
+    {
+        int yourIdCode = 9999999;
+        date newDate, todaysDate;
+        idHeap heap = createHeap();
+        char *filename = "IDCodes.txt";
 
-    handleChoice();
+        if (!strcmp(argv[1], "add")) // strcmp returns 0 if strings are equal
+        {
+            if (argc != 4)
+            {
+                printf("Wrong amount of arguments for 'add' command, type 'help' for available commands");
+            }
+            else if (!validIdcode(atoi(argv[2])) || strlen(argv[2]) > 7)
+            {
+                printf("Invalid ID code, has to be exactly 7 numbers");
+            }
+            else
+            {
+                newDate = convertStringToDate(argv[3]);
+
+                if (!checkDate(newDate) || isDateInFuture(newDate))
+                {
+                    printf("Invalid date!");
+                }
+                else
+                {
+                    FILE *fileptr = fopen(filename, "rb");
+                    heapReadFromFile(fileptr, heap);
+                    fclose(fileptr);
+
+                    heapInsert(heap, createIdDataElement(newDate, atoi(argv[2])));
+                    setToToday(&todaysDate);
+                    deleteOldIdData(heap, getNDaysPrevious(todaysDate, DAYS_IN_RANGE));
+                    fileptr = fopen(filename, "wb");
+                    heapWriteToFile(fileptr, heap);
+                    fclose(fileptr);
+                    printf("Registered interaction with device %d on ", atoi(argv[2]));
+                    printFiStd(newDate);
+                }
+            }
+        }
+        else if (!strcmp(argv[1], "sick"))
+        {
+            if (argc != 3)
+            {
+                printf("Wrong amount of arguments for 'sick' command, type 'help' for available commands");
+            }
+            else if (!validStartcode(atoi(argv[2])) || strlen(argv[2]) > 6)
+            {
+                printf("Invalid start code, has to be exactly 6 numbers");
+            }
+            else
+            {
+                printf("Reporting own device %d to server with start code %d", yourIdCode, atoi(argv[2]));
+            }
+        }
+        else if (!strcmp(argv[1], "check"))
+        {
+            FILE *fileptr = fopen(filename, "rb");
+            if (argc != 3)
+            {
+                printf("Wrong amount of arguments for 'check' command, type 'help' for available commands");
+            }
+            else if (!validIdcode(atoi(argv[2])) || strlen(argv[2]) > 7)
+            {
+                printf("Invalid ID code, has to be exactly 7 numbers");
+            }
+            else if (fileptr == NULL)
+            {
+                printf("No data stored on device\n");
+            }
+            else
+            {
+                heapReadFromFile(fileptr, heap);
+                setToToday(&todaysDate);
+                deleteOldIdData(heap, getNDaysPrevious(todaysDate, DAYS_IN_RANGE));
+                // heapPrint(heap2);
+                if (isIdCodeinHeap(heap, atoi(argv[2])))
+                {
+                    printf("You've been exposed to corona!");
+                }
+                else
+                {
+                    printf("Code not found");
+                }
+            }
+            fclose(fileptr);
+        }
+        else if (!strcmp(argv[1], "debug"))
+        {
+            FILE *fileptr = fopen(filename, "rb");
+            if (fileptr == NULL)
+            {
+                printf("No data stored on device\n");
+            }
+            else
+            {
+                heapReadFromFile(fileptr, heap);
+                setToToday(&todaysDate);
+                deleteOldIdData(heap, getNDaysPrevious(todaysDate, DAYS_IN_RANGE));
+                printf("Stored data\n");
+                heapPrint(heap);
+            }
+            fclose(fileptr);
+        }
+        else if (!strcmp(argv[1], "help"))
+        {
+            printf("Valid commands are:\ncoronablinker.exe add <device id> dd.mm.yyyy\ncoronablinker.exe sick <startcode>\ncoronablinker.exe check <device id>\ncoronablinker.exe debug\n");
+        }
+        else
+        {
+            printf("Unkown argument, type 'help' for available commands");
+        }
+    }
 
     return 0;
 }
