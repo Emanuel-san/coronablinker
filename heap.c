@@ -127,7 +127,7 @@ idData heapPop(idHeap heap)
     return oldestData;
 }
 
-idHeap heapSort(idHeap heap)
+idHeap heapSort(idHeap heap) // g
 {
 
     if (heap->last <= -1)
