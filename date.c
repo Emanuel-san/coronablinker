@@ -1,6 +1,8 @@
 #include "date.h"
 #include <time.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 const int daysInMonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
@@ -137,4 +139,16 @@ bool isDateInFuture(date aDate)
 bool isEqual(date first, date second)
 {
     return (first.year == second.year && first.month == second.month && first.day == second.day);
+}
+
+date convertStringToDate(char str[])
+{
+    int day, month, year;
+    char *delimiters = "./-";
+    date newDate;
+    day = atoi(strtok(str, delimiters));
+    month = atoi(strtok(NULL, delimiters));
+    year = atoi(strtok(NULL, delimiters));
+    setDate(&newDate, day, month, year);
+    return newDate;
 }

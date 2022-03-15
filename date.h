@@ -101,4 +101,10 @@ bool isDateInFuture(date aDate);
  */
 bool isEqual(date first, date second);
 
+/**
+ * @brief
+ *
+ */
+date convertStringToDate(char str[]);
+
 #endif
