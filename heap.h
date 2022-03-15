@@ -19,9 +19,9 @@ typedef struct idDataStruct
  */
 struct idHeapStruct
 {
-    int currentSize;
-    int last;
-    idData data[];
+    int currentSize; // To keep track of the current size of the heap.
+    int last;        // Keep track of the last element in the heap
+    idData data[];   // data array e.g [{idData, idData, ....}]
 };
 
 /**
@@ -31,7 +31,7 @@ typedef struct idHeapStruct *idHeap;
 
 /**
  * @brief Create a Heap object
- * @returns An empty heap for idDates
+ * @returns An empty heap with allocated memory
  */
 idHeap createHeap(void);
 

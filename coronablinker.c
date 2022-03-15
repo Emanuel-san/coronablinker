@@ -68,7 +68,7 @@ void handleChoice(void)
                 {
                     newDate = enterDate();
                     // createNewNode(&list, newDate, idCode);
-                    heap=heapInsert(heap, createIdDataElement(newDate, idCode));
+                    heap = heapInsert(heap, createIdDataElement(newDate, idCode));
                 }
                 break;
 
@@ -117,7 +117,7 @@ void handleChoice(void)
 
 int main(int argc, char *argv[])
 {
-    if (argc == 1)
+    if (argc == 1) // Visual interactive terminal
     {
         handleChoice();
     }
@@ -128,33 +128,38 @@ int main(int argc, char *argv[])
         idHeap heap = createHeap();
         char *filename = "IDCodes.txt";
 
-        if (!strcmp(argv[1], "add")) // strcmp returns 0 if strings are equal
+        /* STRCMP RETURNS 0 IF STRINGS ARE EQUAL*/
+        if (!strcmp(argv[1], "add")) // add <idcode> <date> -- Insert new device interaction into the heap and store to file
         {
             if (argc != 4)
             {
                 printf("Wrong amount of arguments for 'add' command, type 'help' for available commands");
             }
-            else if (!validIdcode(atoi(argv[2])) || strlen(argv[2]) > 7)
+            else if (!validIdcode(atoi(argv[2])) || strlen(argv[2]) > 7) // valid id code and length
             {
                 printf("Invalid ID code, has to be exactly 7 numbers");
             }
             else
             {
-                newDate = convertStringToDate(argv[3]);
+                newDate = convertStringToDate(argv[3]); // convert the date from a string to a date data type
 
-                if (!checkDate(newDate) || isDateInFuture(newDate))
+                if (!checkDate(newDate) || isDateInFuture(newDate)) // check that date is valid
                 {
                     printf("Invalid date!");
                 }
                 else
                 {
+                    // If there is stored data in a file then read that data into a heap first...
                     FILE *fileptr = fopen(filename, "rb");
                     heapReadFromFile(fileptr, heap);
                     fclose(fileptr);
 
-                    heap=heapInsert(heap, createIdDataElement(newDate, atoi(argv[2])));
+                    //...and then insert the new data into the heap...
+                    heap = heapInsert(heap, createIdDataElement(newDate, atoi(argv[2])));
                     setToToday(&todaysDate);
+                    // ...delete old id data based of n amount of days in range...
                     deleteOldIdData(heap, getNDaysPrevious(todaysDate, DAYS_IN_RANGE));
+                    // ...and write is back to file.
                     fileptr = fopen(filename, "wb");
                     heapWriteToFile(fileptr, heap);
                     fclose(fileptr);
@@ -163,13 +168,13 @@ int main(int argc, char *argv[])
                 }
             }
         }
-        else if (!strcmp(argv[1], "sick"))
+        else if (!strcmp(argv[1], "sick")) // sick <startcode> -- Send startcode and idcode to server
         {
             if (argc != 3)
             {
                 printf("Wrong amount of arguments for 'sick' command, type 'help' for available commands");
             }
-            else if (!validStartcode(atoi(argv[2])) || strlen(argv[2]) > 6)
+            else if (!validStartcode(atoi(argv[2])) || strlen(argv[2]) > 6) // check valid startcode and length
             {
                 printf("Invalid start code, has to be exactly 6 numbers");
             }
@@ -178,56 +183,61 @@ int main(int argc, char *argv[])
                 printf("Reporting own device %d to server with start code %d", yourIdCode, atoi(argv[2]));
             }
         }
-        else if (!strcmp(argv[1], "check"))
+        else if (!strcmp(argv[1], "check")) // check <id code> -- check if an idcode exists in the stored file
         {
             FILE *fileptr = fopen(filename, "rb");
             if (argc != 3)
             {
                 printf("Wrong amount of arguments for 'check' command, type 'help' for available commands");
             }
-            else if (!validIdcode(atoi(argv[2])) || strlen(argv[2]) > 7)
+            else if (!validIdcode(atoi(argv[2])) || strlen(argv[2]) > 7) // check valid id code and length
             {
                 printf("Invalid ID code, has to be exactly 7 numbers");
             }
-            else if (fileptr == NULL)
+            else if (fileptr == NULL) // either failed to open file or there is no data stored
             {
-                printf("No data stored on device\n");
+                printf("Failed to open file or no data stored on device\n");
             }
             else
             {
+                // Read data from file and check if idcode exists in the heap
                 heapReadFromFile(fileptr, heap);
                 setToToday(&todaysDate);
                 deleteOldIdData(heap, getNDaysPrevious(todaysDate, DAYS_IN_RANGE));
-                // heapPrint(heap2);
                 if (isIdCodeinHeap(heap, atoi(argv[2])))
                 {
                     printf("You've been exposed to corona!");
                 }
                 else
                 {
-                    printf("Code not found");
+                    printf("Code not found, not exposed");
                 }
             }
             fclose(fileptr);
         }
-        else if (!strcmp(argv[1], "debug"))
+        else if (!strcmp(argv[1], "debug")) // debug
         {
             FILE *fileptr = fopen(filename, "rb");
-            if (fileptr == NULL)
+            if (fileptr == NULL) // either failed to open file or there is no data stored
             {
-                printf("No data stored on device\n");
+                printf("Failed to open file or no data stored on device\n");
             }
             else
             {
+                /*
+                Read data from file, delete old data according to n amount of days in range set from todays date,
+                sort it and then print the whole heap.
+                */
                 heapReadFromFile(fileptr, heap);
                 setToToday(&todaysDate);
                 deleteOldIdData(heap, getNDaysPrevious(todaysDate, DAYS_IN_RANGE));
+                heap = heapSort(heap);
                 printf("Stored data\n");
                 heapPrint(heap);
             }
             fclose(fileptr);
         }
-        else if (!strcmp(argv[1], "help"))
+        else if (!strcmp(argv[1], "help")) // welp :(
         {
             printf("Valid commands are:\ncoronablinker.exe add <device id> dd.mm.yyyy\ncoronablinker.exe sick <startcode>\ncoronablinker.exe check <device id>\ncoronablinker.exe debug\n");
         }
