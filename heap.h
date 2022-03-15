@@ -63,7 +63,7 @@ idData heapPop(idHeap heap);
 void heapPrint(idHeap heap);
 
 /**
- * @brief
+ * @brief test
  *
  * @param heap
  * @return idHeap
