@@ -77,12 +77,16 @@ int main(int argc, char *argv[])
     char *filename = "IDCodesbinary.txt";
     int yourIdCode = 9999999;
 
-    // TEST_CASE("Testing createHeap");
-    heap = createHeap();
-    heap2 = createHeap();
-
     if (argc == 1)
     {
+        TEST_CASE("Testing createHeap");
+        heap = createHeap();
+        heap2 = createHeap();
+
+        TEST_CASE("Testing heapResize");
+        printf("heap->currentSize= %d", heap->currentSize);
+        heapResize(heap);
+        printf("heap->currentSize= %d", heap->currentSize);
 
         TEST_CASE("Testing heapIsEmpty");
         VERIFY(heapIsEmpty(heap), "Heap is empty");
@@ -143,6 +147,8 @@ int main(int argc, char *argv[])
     }
     else
     {
+        heap = createHeap();
+        heap2 = createHeap();
         // char *command_strings[] = {"add", "sick", "check", "debug", "help"};
         // printf("%d", atoi(argv[2]));
         if (!strcmp(argv[1], "add")) // strcmp returns 0 if strings are equal

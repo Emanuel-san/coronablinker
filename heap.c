@@ -5,7 +5,9 @@
 
 idHeap createHeap(void)
 {
-    idHeap tmp = malloc(sizeof(struct idHeapStruct));
+    int startsize = 40;
+
+    idHeap tmp = malloc(sizeof(struct idHeapStruct) + startsize * sizeof(idData));
     // memset(tmp->data, 0, MAX_SIZE * sizeof(int));
     if (tmp == NULL)
     {
@@ -13,6 +15,7 @@ idHeap createHeap(void)
         exit(0);
     }
     tmp->last = -1;
+    tmp->currentSize = startsize;
     return tmp;
 }
 
@@ -24,6 +27,7 @@ bool heapIsEmpty(idHeap heap)
 void heapInsert(idHeap heap, idData data)
 {
     int parent, child;
+
     idData tmp;
 
     if (heap == NULL)
@@ -33,10 +37,9 @@ void heapInsert(idHeap heap, idData data)
     }
 
     // TODO FIXA REALLOC
-    if (heap->last == 99999)
+    if (heap->last == heap->currentSize - 1)
     {
-        // printf("GO HOME! You reached the end of the heap!\n");
-        return;
+        heapResize(heap);
     }
 
     // Set the new data furthest down in the "tree" (last + 1) and set child as that node
@@ -219,4 +222,12 @@ idData createIdDataElement(date newDate, int newIdCode)
     newIdData.date = newDate;
     newIdData.idCode = newIdCode;
     return newIdData;
+}
+
+void heapResize(idHeap heap)
+{
+    int temp = heap->last;
+    heap = realloc(heap, sizeof(struct idHeapStruct) + (heap->currentSize + 40) * sizeof(idData));
+    heap->currentSize += 40;
+    heap->last = temp;
 }

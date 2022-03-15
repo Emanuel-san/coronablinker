@@ -19,8 +19,9 @@ typedef struct idDataStruct
  */
 struct idHeapStruct
 {
-    idData data[100000];
+    int currentSize;
     int last;
+    idData data[];
 };
 
 /**
@@ -108,5 +109,12 @@ void heapReadFromFile(FILE *filePtr, idHeap heap);
  * @return idData
  */
 idData createIdDataElement(date newDate, int newIdCode);
+
+/**
+ * @brief 
+ * 
+ * @param heap 
+ */
+void heapResize(idHeap heap);
 
 #endif
