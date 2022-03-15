@@ -57,7 +57,7 @@ idHeap heapInsert(idHeap heap, idData data);
 idData heapPop(idHeap heap);
 
 /**
- * @brief test
+ * @brief MIN test
  *
  */
 void heapPrint(idHeap heap);
