@@ -99,7 +99,7 @@ void heapWriteToFile(FILE *filePtr, idHeap heap);
  * @brief
  *
  */
-void heapReadFromFile(FILE *filePtr, idHeap heap);
+idHeap heapReadFromFile(FILE *filePtr, idHeap heap);
 
 /**
  * @brief Create a Id Data Element object
