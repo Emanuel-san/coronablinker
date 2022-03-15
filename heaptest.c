@@ -83,14 +83,20 @@ int main(int argc, char *argv[])
         heap = createHeap();
         heap2 = createHeap();
         heap3 = createHeap();
+        int initialSize = heap->currentSize;
 
         TEST_CASE("Testing heapResize");
-        printf("heap->currentSize= %d\n", heap->currentSize);
+        VERIFY(heap->currentSize == initialSize, "The heap is still at starting size ");
+        printf("%d\n", initialSize);
         heap = heapResize(heap);
-        printf("heap->currentSize= %d\n", heap->currentSize);
+        VERIFY(heap->currentSize > initialSize, "The heap size has increased from starting size and is now ");
+        printf("%d\n", heap->currentSize);
 
-        TEST_CASE("Testing that heapInsert reallocs when needed");
-        printf("heap3->currentSize= %d\n", heap3->currentSize);
+        initialSize = heap3->currentSize;
+        TEST_CASE("Testing that heapInsert reallocs(heapResize) when needed");
+        VERIFY(heap3->currentSize == initialSize, "The heap is still at starting size ");
+        printf("%d\n", initialSize);
+
         setDate(&aDate, 5, 5, 2022);
         inData.idCode = 6475656;
         inData.date = aDate;
@@ -99,7 +105,8 @@ int main(int argc, char *argv[])
         {
             heap3 = heapInsert(heap3, inData);
         }
-        printf("heap3->currentSize= %d\n", heap3->currentSize);
+        VERIFY(heap3->currentSize > initialSize, "The heap size has increased from starting size and is now ");
+        printf("%d\n", heap3->currentSize);
 
         TEST_CASE("Testing heapIsEmpty");
         VERIFY(heapIsEmpty(heap), "Heap is empty");
