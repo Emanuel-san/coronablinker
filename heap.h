@@ -47,7 +47,7 @@ bool heapIsEmpty(idHeap heap);
  * @param heap The heap to insert the idData element into
  * @param data The idData element to insert
  */
-void heapInsert(idHeap heap, idData data);
+idHeap heapInsert(idHeap heap, idData data);
 
 /**
  * @brief Function for removing the idData element with the oldest date in the heap
@@ -111,10 +111,10 @@ void heapReadFromFile(FILE *filePtr, idHeap heap);
 idData createIdDataElement(date newDate, int newIdCode);
 
 /**
- * @brief 
- * 
- * @param heap 
+ * @brief
+ *
+ * @param heap
  */
-void heapResize(idHeap heap);
+idHeap heapResize(idHeap heap);
 
 #endif

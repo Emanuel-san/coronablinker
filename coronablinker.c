@@ -68,7 +68,7 @@ void handleChoice(void)
                 {
                     newDate = enterDate();
                     // createNewNode(&list, newDate, idCode);
-                    heapInsert(heap, createIdDataElement(newDate, idCode));
+                    heap=heapInsert(heap, createIdDataElement(newDate, idCode));
                 }
                 break;
 
@@ -152,7 +152,7 @@ int main(int argc, char *argv[])
                     heapReadFromFile(fileptr, heap);
                     fclose(fileptr);
 
-                    heapInsert(heap, createIdDataElement(newDate, atoi(argv[2])));
+                    heap=heapInsert(heap, createIdDataElement(newDate, atoi(argv[2])));
                     setToToday(&todaysDate);
                     deleteOldIdData(heap, getNDaysPrevious(todaysDate, DAYS_IN_RANGE));
                     fileptr = fopen(filename, "wb");

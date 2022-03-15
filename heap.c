@@ -24,7 +24,7 @@ bool heapIsEmpty(idHeap heap)
     return (heap->last == -1);
 }
 
-void heapInsert(idHeap heap, idData data)
+idHeap heapInsert(idHeap heap, idData data)
 {
     int parent, child;
 
@@ -33,13 +33,13 @@ void heapInsert(idHeap heap, idData data)
     if (heap == NULL)
     {
         printf("ERROR!\n");
-        return;
+        return heap;
     }
 
     // TODO FIXA REALLOC
     if (heap->last == heap->currentSize - 1)
     {
-        heapResize(heap);
+        heap = heapResize(heap);
     }
 
     // Set the new data furthest down in the "tree" (last + 1) and set child as that node
@@ -68,6 +68,7 @@ void heapInsert(idHeap heap, idData data)
         // Move the child up one level and check again.
         child = parent;
     }
+    return heap;
 }
 
 idData heapPop(idHeap heap)
@@ -139,7 +140,7 @@ idHeap heapSort(idHeap heap)
 
     while (heap->last > -1)
     {
-        heapInsert(sortedHeap, heapPop(heap));
+        sortedHeap = heapInsert(sortedHeap, heapPop(heap));
     }
 
     free(heap);
@@ -212,7 +213,7 @@ void heapReadFromFile(FILE *filePtr, idHeap heap)
     idData data;
     while (fread(&data, sizeof(idData), 1, filePtr) == 1)
     {
-        heapInsert(heap, data);
+        heap = heapInsert(heap, data);
     }
 }
 
@@ -224,10 +225,11 @@ idData createIdDataElement(date newDate, int newIdCode)
     return newIdData;
 }
 
-void heapResize(idHeap heap)
+idHeap heapResize(idHeap heap)
 {
     int temp = heap->last;
     heap = realloc(heap, sizeof(struct idHeapStruct) + (heap->currentSize + 40) * sizeof(idData));
     heap->currentSize += 40;
     heap->last = temp;
+    return heap;
 }

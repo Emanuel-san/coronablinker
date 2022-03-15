@@ -28,47 +28,47 @@ void createTestHeap(idHeap heap)
 
     setDate(&aDate, 12, 2, 2022);
     inData.date = aDate;
-    heapInsert(heap, inData);
+    heap = heapInsert(heap, inData);
     setDate(&aDate, 5, 1, 2022);
     inData.date = aDate;
-    heapInsert(heap, inData);
+    heap = heapInsert(heap, inData);
     setDate(&aDate, 28, 12, 2021);
     inData.date = aDate;
-    heapInsert(heap, inData);
+    heap = heapInsert(heap, inData);
     setDate(&aDate, 20, 2, 2022);
     inData.date = aDate;
-    heapInsert(heap, inData);
+    heap = heapInsert(heap, inData);
     setDate(&aDate, 20, 3, 2022);
     inData.date = aDate;
-    heapInsert(heap, inData);
+    heap = heapInsert(heap, inData);
     setDate(&aDate, 10, 3, 2022);
     inData.date = aDate;
-    heapInsert(heap, inData);
+    heap = heapInsert(heap, inData);
     setDate(&aDate, 4, 11, 2021);
     inData.date = aDate;
-    heapInsert(heap, inData);
+    heap = heapInsert(heap, inData);
     setDate(&aDate, 21, 10, 2021);
     inData.date = aDate;
-    heapInsert(heap, inData);
+    heap = heapInsert(heap, inData);
     setDate(&aDate, 5, 5, 2022);
     inData.idCode = 6475656;
     inData.date = aDate;
-    heapInsert(heap, inData);
+    heap = heapInsert(heap, inData);
     setDate(&aDate, 7, 8, 2019);
     inData.date = aDate;
-    heapInsert(heap, inData);
+    heap = heapInsert(heap, inData);
     setDate(&aDate, 20, 9, 2023);
     inData.date = aDate;
-    heapInsert(heap, inData);
+    heap = heapInsert(heap, inData);
     setDate(&aDate, 10, 10, 2020);
     inData.date = aDate;
-    heapInsert(heap, inData);
+    heap = heapInsert(heap, inData);
 }
 
 int main(int argc, char *argv[])
 {
 
-    idHeap heap = NULL, heap2;
+    idHeap heap = NULL, heap2, heap3;
     idData inData, outData;
     date aDate;
     setToToday(&aDate);
@@ -82,17 +82,30 @@ int main(int argc, char *argv[])
         TEST_CASE("Testing createHeap");
         heap = createHeap();
         heap2 = createHeap();
+        heap3 = createHeap();
 
         TEST_CASE("Testing heapResize");
-        printf("heap->currentSize= %d", heap->currentSize);
-        heapResize(heap);
-        printf("heap->currentSize= %d", heap->currentSize);
+        printf("heap->currentSize= %d\n", heap->currentSize);
+        heap = heapResize(heap);
+        printf("heap->currentSize= %d\n", heap->currentSize);
+
+        TEST_CASE("Testing that heapInsert reallocs when needed");
+        printf("heap3->currentSize= %d\n", heap3->currentSize);
+        setDate(&aDate, 5, 5, 2022);
+        inData.idCode = 6475656;
+        inData.date = aDate;
+        int current = heap3->currentSize;
+        for (int i = 0; i < current + 3; i++)
+        {
+            heap3 = heapInsert(heap3, inData);
+        }
+        printf("heap3->currentSize= %d\n", heap3->currentSize);
 
         TEST_CASE("Testing heapIsEmpty");
         VERIFY(heapIsEmpty(heap), "Heap is empty");
 
         TEST_CASE("Testing heapInsert");
-        heapInsert(heap, inData);
+        heap = heapInsert(heap, inData);
         VERIFY(!heapIsEmpty(heap), "Heap is not empty");
         printf("Root data in heap is now\n");
         printFiStd(heap->data[0].date);
@@ -180,7 +193,7 @@ int main(int argc, char *argv[])
                     heapReadFromFile(fileptr, heap2);
                     fclose(fileptr);
 
-                    heapInsert(heap2, createIdDataElement(newDate, atoi(argv[2])));
+                    heap2 = heapInsert(heap2, createIdDataElement(newDate, atoi(argv[2])));
                     setDate(&aDate, 31, 12, 2021);
                     deleteOldIdData(heap2, aDate);
                     fileptr = fopen(filename, "wb");
