@@ -46,6 +46,7 @@ bool heapIsEmpty(idHeap heap);
  * @brief Function for inserting an idData element into the heap
  * @param heap The heap to insert the idData element into
  * @param data The idData element to insert
+ * @returns The heap (the new heap if resizing is needed)
  */
 idHeap heapInsert(idHeap heap, idData data);
 
@@ -57,63 +58,67 @@ idHeap heapInsert(idHeap heap, idData data);
 idData heapPop(idHeap heap);
 
 /**
- * @brief MIN test
- *
+ * @brief Function for printing the elements in the heap
+ * @param heap The heap to be printed
  */
 void heapPrint(idHeap heap);
 
 /**
- * @brief test
- *
- * @param heap
- * @return idHeap
+ * @brief Function for sorting the heap to easily print in correct order
+ * @param heap The heap to be sorted
+ * @return The sorted heap
  */
 idHeap heapSort(idHeap heap);
 
 /**
- * @brief
- *
- * @param heap
+ * @brief Function for deleting elements older than a specific cutoff date
+ * @param heap The heap from which to remove the old elements
+ * @param cutoff The cutoff date
  */
 void deleteOldIdData(idHeap heap, date cutoff);
 
 /**
- * @brief
- *
+ * @brief Function for searching for an idCode in a heap
+ * @param heap The heap to search
+ * @param code The idCode to search for
+ * @returns True if the code is in the heap, false otherwise
  */
 bool isIdCodeinHeap(idHeap heap, int code);
 
 /**
- * @brief
- *
+ * @brief Function for destroying a heap
+ * @param heap The heap to destroy
+ * @returns NULL if the heap is destroyed, the heap otherwise
  */
 idHeap heapDestroy(idHeap heap);
 
 /**
- * @brief
- *
+ * @brief Function for writing the elements of the heap to a file
+ * @param filePtr A pointer to the file to write to
+ * @param heap The heap to write to the file
  */
 void heapWriteToFile(FILE *filePtr, idHeap heap);
 
 /**
- * @brief
- *
+ * @brief Function for reading from a file to a heap
+ * @param filePtr A pointer to the file to read from
+ * @param heap The heap to read into
+ * @returns The heap (the new heap if resizing is needed)
  */
 idHeap heapReadFromFile(FILE *filePtr, idHeap heap);
 
 /**
- * @brief Create a Id Data Element object
- *
- * @param newDate
- * @param newIdCode
- * @return idData
+ * @brief Function for creating a idData element
+ * @param newDate The date to put in the idData element
+ * @param newIdCode The idCode to put in the idData element
+ * @return The new idData element
  */
 idData createIdDataElement(date newDate, int newIdCode);
 
 /**
- * @brief
- *
- * @param heap
+ * @brief Function for resizing the heap if the total number of elements is reached
+ * @param heap A pointer to the original heap
+ * @returns The pointer to the new bigger heap
  */
 idHeap heapResize(idHeap heap);
 

@@ -102,8 +102,9 @@ bool isDateInFuture(date aDate);
 bool isEqual(date first, date second);
 
 /**
- * @brief
- *
+ * @brief A function for converting a string to a date
+ * @param str[] The string with the infomation about the date
+ * @returns The date
  */
 date convertStringToDate(char str[]);
 
