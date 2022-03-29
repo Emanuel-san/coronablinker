@@ -80,7 +80,9 @@ void handleChoice(void)
                     // deleteOldIdCodes(&list, getNDaysPrevious(newDate, DAYS_IN_RANGE));
                     deleteOldIdData(heap, getNDaysPrevious(newDate, DAYS_IN_RANGE));
                     // if (isCodeInList(list, idCode))
-                    if (isIdCodeinHeap(heap, idCode))
+                    idData d;
+                    d.idCode = idCode;
+                    if (lookupOnSecond(heap, d))
                     {
                         printf("You've been exposed to corona!\n");
                     }
@@ -165,6 +167,7 @@ int main(int argc, char *argv[])
                     fclose(fileptr);
                     printf("Registered interaction with device %d on ", atoi(argv[2]));
                     printFiStd(newDate);
+                    printf("\n");
                 }
             }
         }
@@ -204,7 +207,9 @@ int main(int argc, char *argv[])
                 heapReadFromFile(fileptr, heap);
                 setToToday(&todaysDate);
                 deleteOldIdData(heap, getNDaysPrevious(todaysDate, DAYS_IN_RANGE));
-                if (isIdCodeinHeap(heap, atoi(argv[2])))
+                idData d;
+                d.idCode =  atoi(argv[2]);
+                if (lookupOnSecond(heap, d))
                 {
                     printf("You've been exposed to corona!");
                 }

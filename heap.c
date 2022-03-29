@@ -176,11 +176,11 @@ void deleteOldIdData(idHeap heap, date cutoff)
     }
 }
 
-bool isIdCodeinHeap(idHeap heap, int code)
+bool lookupOnSecond(idHeap heap, idData d)
 {
     for (int i = 0; i <= heap->last; i++) // loop untill we reach the last element...
     {
-        if (heap->data[i].idCode == code) // ...or we find the ID code in the heap
+        if (compareSecond(heap->data[i], d)) // ...or we find the ID code in the heap
         {
             return true;
         }
@@ -219,6 +219,10 @@ idHeap heapReadFromFile(FILE *filePtr, idHeap heap)
     //     heapInsert(heap, data);
     // }
 
+    if (filePtr == NULL)
+    {
+        return heap;
+    }
     idData data;
     while (fread(&data, sizeof(idData), 1, filePtr) == 1) // BINARY READ -- read untill fread dosen't get a succesfull "read"
     {

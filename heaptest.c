@@ -147,8 +147,8 @@ int main(int argc, char *argv[])
         heapPrint(heap);
 
         TEST_CASE("testing isIdCodeInHeap");
-        VERIFY(isIdCodeinHeap(heap, 6475656), "Id code is in heap");
-        VERIFY(!isIdCodeinHeap(heap, 9999999), "Id code is not in heap");
+        VERIFY(lookupOnSecond(heap, createIdDataElement(aDate, 6475656)), "Id code is in heap");
+        VERIFY(!lookupOnSecond(heap, createIdDataElement(aDate, 9999999)), "Id code is not in heap");
 
         TEST_CASE("Testing binary write and read from files");
         FILE *fileptr = fopen(filename, "wb");
@@ -244,7 +244,7 @@ int main(int argc, char *argv[])
                 setDate(&aDate, 31, 12, 2021);
                 deleteOldIdData(heap2, aDate);
                 // heapPrint(heap2);
-                if (isIdCodeinHeap(heap2, atoi(argv[2])))
+                if (lookupOnSecond(heap2, createIdDataElement(aDate, atoi(argv[2]))))
                 {
                     printf("You've been exposed to corona!");
                 }

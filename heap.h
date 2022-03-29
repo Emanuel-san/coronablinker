@@ -3,20 +3,11 @@
 
 #include <stdio.h>
 #include "date.h"
-
-/**
- * @brief Datatype for storing ID data such as date and identification code.
- */
-typedef struct idDataStruct
-{
-    date date;
-    int idCode;
-
-} idData;
+#include "devicepair.h"
 
 /**
  * @brief Struct for storing a heap of idData structs
- */
+*/
 struct idHeapStruct
 {
     int currentSize; // To keep track of the current size of the heap.
@@ -78,12 +69,12 @@ idHeap heapSort(idHeap heap);
 void deleteOldIdData(idHeap heap, date cutoff);
 
 /**
- * @brief Function for searching for an idCode in a heap
+ * @brief Function for searching for a data element in a heap based on its second key
  * @param heap The heap to search
- * @param code The idCode to search for
- * @returns True if the code is in the heap, false otherwise
+ * @param lookup An idData element with the second key we're looking for
+ * @returns True if the  is in the heap, false otherwise
  */
-bool isIdCodeinHeap(idHeap heap, int code);
+bool lookupOnSecond(idHeap heap, idData lookup);
 
 /**
  * @brief Function for destroying a heap
